@@ -3,10 +3,10 @@
 	"apiVersion": 3,
 	"name": "create-block/wordpress-assessment",
 	"version": "0.1.0",
-	"title": "Word Press Assessment",
+	"title": "WordPress Assessment Form",
 	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"icon": "id",
+	"description": "WordPress Assessment block form to get data from the frontend.",
 	"example": {},
 	"supports": {
 		"html": false
