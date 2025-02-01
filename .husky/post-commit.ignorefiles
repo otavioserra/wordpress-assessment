@@ -1,0 +1,11 @@
+.husky/
+.git/
+node_modules/
+src/
+.eslintrc
+.gitignore
+.editorconfig
+tailwind.config.js
+postcss.config.js
+package-lock.json
+package.json

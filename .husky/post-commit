@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Define the destination folder where you want to copy the files
+DESTINATION_DIR="/c/Users/otavi/OneDrive/Documentos/Web/wordpress/wp-content/plugins/otavio-serra-plugin.php"
+
+# Check if the directory exists
+if [ ! -d "$DESTINATION_DIR" ]; then
+  # Create the directory
+  echo "Creating the directory: " . "$DESTINATION_DIR";
+  mkdir -p "$DESTINATION_DIR"
+fi
+
+unset GIT_INDEX_FILE
+echo "Start copy files to: " . "$DESTINATION_DIR";
+
+# Use configuration file to ignore coding files (.husky/post-commit.ignorefiles)
+if [ -f ".husky/post-commit.ignorefiles" ]; then
+  rsync -av --exclude-from=".husky/post-commit.ignorefiles" . "$DESTINATION_DIR"
+else
+  echo ".husky/post-commit.ignorefiles not exist!";
+fi
+
+echo "End copy";
+exit 0;
+
+# Use configuration file to ignore coding files (.husky/post-commit.ignorefiles)
+if [ -f ".husky/post-commit.ignorefiles" ]; then
+  exclude_args=""
+  while IFS= read -r item; do
+    item=$(echo "$item" | tr -d '\r')  # Remove CR characters (\r)
+    exclude_args="${exclude_args} --exclude '${item}'"
+  done < ".husky/post-commit.ignorefiles"
+  echo "rsync -av ${exclude_args} ${DESTINATION_DIR}";
+  rsync -av $exclude_args . "$DESTINATION_DIR"
+else
+  echo ".husky/post-commit.ignorefiles not exist!";
+fi
+
+echo "End copy";
+exit 0;

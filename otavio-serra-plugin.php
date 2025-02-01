@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       WordPress Assessment
+ * Plugin Name:       Otavio Serra Plugin
  * Description:       WordPress Plugin Development Challenge - The Company requires a form on the website that allows the developers to submit their information to be interviewed for a development position.
  * Version:           0.1.0
  * Requires at least: 6.7
@@ -8,7 +8,7 @@
  * Author:            Otávio Campos de Abreu Serra
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       wordpress-assessment
+ * Text Domain:       otavio-serra-plugin
  *
  * @package CreateBlock
  */
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_wordpress_assessment_block_init() {
-	register_block_type( __DIR__ . '/build/wordpress-assessment' );
+function create_block_otavio_serra_plugin_block_init() {
+	register_block_type( __DIR__ . '/src' );
 }
-add_action( 'init', 'create_block_wordpress_assessment_block_init' );
+add_action( 'init', 'create_block_otavio_serra_plugin_block_init' );

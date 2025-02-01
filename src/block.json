@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/wordpress-assessment",
+	"name": "create-block/otavio-serra-plugin",
 	"version": "0.1.0",
-	"title": "WordPress Assessment Form",
+	"title": "Otavio Serra Plugin Form",
 	"category": "widgets",
 	"icon": "id",
 	"description": "WordPress Assessment block form to get data from the frontend.",
@@ -11,7 +11,7 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "wordpress-assessment",
+	"textdomain": "otavio-serra-plugin",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
