@@ -27,7 +27,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             }
 
             if ( $block_instance ) {
-                return render_block( $block_instance );
+                return 'Block: '.render_block( $block_instance );
             } else {
                 return 'Block not found.';
             }
