@@ -16,6 +16,8 @@ if( ! class_exists( 'Block_Shortcode' ) ){
                 'blockName' => OS_BLOCK_ID, // Name of your block
                 'attrs' => $atts, // Block attributes
             );
+
+            return 'Block String: '.render_block( $block );
         
             // Render the block
             if ( function_exists( 'render_block' ) ) {
