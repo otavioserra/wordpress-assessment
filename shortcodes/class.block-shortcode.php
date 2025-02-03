@@ -24,13 +24,15 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             // Get the block type object
             $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
 
+            $content = 'block_type->view_script: ' . $block_type->view_script;
+
+            return $content;
+
             // Enqueue the block's script (if it has one)
             if ( ! empty( $block_type->view_script ) ) {
                 wp_enqueue_script( $block_type->view_script );
 
-                echo $block_type->view_script;
-                exit;
-                
+
                 // Add attributes as inline script, associated with the already enqueued script.
                 $data = sprintf(
                     'var otavioSerraBlockData = otavioSerraBlockData || {}; otavioSerraBlockData["%s"] = %s;',
