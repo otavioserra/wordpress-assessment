@@ -7,48 +7,44 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         }
 
         public function add_shortcode( $atts = array() ){
-            // Check if the block is registered
-            if ( ! WP_Block_Type_Registry::get_instance()->is_registered( OS_BLOCK_ID ) ) {
-                return ''; // Or an error message
+            $atts = shortcode_atts( array(
+                'id' => OS_BLOCK_ID,
+            ), $atts, OS_BLOCK_SHORTCODE_ID );
+        
+            if ( ! $atts['id'] ) {
+                return 'Block ID not provided.';
             }
-
-            // Extract shortcode attributes
-            $atts = shortcode_atts(
-                array(
-                // Default attributes, if any
-                ),
-                $atts,
-                OS_BLOCK_SHORTCODE_ID
+        
+            $block_id = $atts['id'];
+        
+            ob_start();
+        
+            // Search for the wp_block post type with the block ID
+            $args = array(
+                'post_type' => 'wp_block',
+                'p' => $block_id,
             );
-
-            // Get the block type object
-            $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
-
-            // Enqueue the block's script (if it has one)
-            if ( ! empty( $block_type->view_script ) ) {
-                wp_enqueue_script( $block_type->view_script );
-
-
-                // Add attributes as inline script, associated with the already enqueued script.
-                $data = sprintf(
-                    'var otavioSerraBlockData = otavioSerraBlockData || {}; otavioSerraBlockData["%s"] = %s;',
-                    esc_js( $unique_id ),
-                    wp_json_encode( $atts )
-                );
-                wp_add_inline_script( $block_type->view_script, $data, 'before' );
+            $query = new WP_Query( $args );
+        
+            if ( $query->have_posts() ) {
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    $block_content = get_the_content(); // Block content
+        
+                    // Render the block using do_blocks or render_block (WordPress 5.5+)
+                    if ( function_exists( 'render_block' ) ) {
+                        echo render_block( array( 'blockName' => OS_BLOCK_ID, 'innerHTML' => $block_content ) );
+                    } else {
+                        echo do_blocks( $block_content ); // fallback for older versions
+                    }
+                }
+            } else {
+                echo 'Block not found.';
             }
-
-            // Create a unique ID for the placeholder (important to avoid conflicts)
-            $unique_id = OS_BLOCK_ID . '-' . uniqid();
-
-            // Render the HTML placeholder
-            $content = sprintf(
-                '<div id="%s" class="' . OS_BLOCK_ID . '-container" data-attributes="%s"></div>',
-                $unique_id,
-                esc_attr( wp_json_encode( $atts ) )
-            );
-
-            return $content;
+        
+            wp_reset_postdata();
+        
+            return ob_get_clean();
         }
     }
 }

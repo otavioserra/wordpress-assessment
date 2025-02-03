@@ -63,7 +63,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
         }
 
 		public function register_blocks(){
-			register_block_type( __DIR__ );
+			register_block_type( __DIR__ . '/build' );
 		}
 
 	}
