@@ -7,6 +7,11 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         }
 
         public function add_shortcode( $atts = array() ){
+            // Get the Block Type:
+            $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
+
+            return 'Block Data: ' . print_r( $block_type, true );
+
             $atts = shortcode_atts( array(
                 'id' => OS_BLOCK_ID,
             ), $atts, OS_BLOCK_SHORTCODE_ID );
