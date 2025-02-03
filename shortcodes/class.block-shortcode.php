@@ -27,9 +27,21 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             }
 
             if ( $block_instance ) {
-                return 'Block: '.render_block( $block_instance );
+
+                // 3. Diagnóstico: Verifique o que está sendo passado para render_block
+                echo '<pre>'; // Pretag para formatar o var_dump
+                var_dump( $block_instance ); // Veja a estrutura do bloco
+                echo '</pre>';
+        
+                $output = render_block( $block_instance ); // Armazena o retorno de render_block
+                echo 'HTML Gerado: <pre>';
+                var_dump($output);
+                echo '</pre>';
+        
+                return 'Block: ' . $output; // Retorna o HTML renderizado
+        
             } else {
-                return 'Block not found.';
+                return 'Bloco não encontrado.';
             }
         }
     }
