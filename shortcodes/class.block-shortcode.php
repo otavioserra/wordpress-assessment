@@ -28,6 +28,9 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             if ( ! empty( $block_type->view_script ) ) {
                 wp_enqueue_script( $block_type->view_script );
 
+                echo $block_type->view_script;
+                exit;
+                
                 // Add attributes as inline script, associated with the already enqueued script.
                 $data = sprintf(
                     'var otavioSerraBlockData = otavioSerraBlockData || {}; otavioSerraBlockData["%s"] = %s;',
