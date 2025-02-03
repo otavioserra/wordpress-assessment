@@ -9,7 +9,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         public function add_shortcode( $atts = array() ){
             $atts = shortcode_atts( array(
                 // More attrs here
-            ), $atts, 'my_block_shortcode' );
+            ), $atts, OS_BLOCK_SHORTCODE_ID );
         
             // Create the block array
             $block = array(
