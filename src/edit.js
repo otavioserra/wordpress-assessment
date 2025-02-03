@@ -4,11 +4,11 @@ import './editor.scss';
 
 export default function Edit() {
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
+		<p {...useBlockProps()}>
+			{__(
 				'Word Press Assessment – hello from the editor!',
 				'wordpress-assessment'
-			) }
+			)}
 		</p>
 	);
 }
