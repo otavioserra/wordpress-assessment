@@ -22,12 +22,17 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             $this->define_constants();
 
 			add_action( 'init', array( $this, 'register_blocks' ) );
+
+			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
+            $Block_Shortcode = new Block_Shortcode();
 		}
 
 		private function define_constants(){
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
             define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
+            define( 'OS_BLOCK_ID', 'assessment/otavio-serra-plugin' ); // Block ID.
+            define( 'OS_BLOCK_SHORTCODE_ID', 'otavio_serra_block' ); // Block shortcode ID.
             define( 'OS_ON_DESCTIVATION_DROP_TABLES', true ); // Change to true to drop tables on desactivation.
             define( 'OS_ON_UNINSTALL_DROP_TABLES', true ); // Change to true to drop tables on uninstall.
         }
