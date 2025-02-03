@@ -7,56 +7,22 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         }
 
         public function add_shortcode( $atts = array() ){
-            // Render the block using do_blocks or render_block (WordPress 5.5+)
-            if ( function_exists( 'render_block' ) ) {
-                return render_block( array( 'blockName' => OS_BLOCK_ID, 'innerHTML' => $block_content ) );
-            } else {
-                return do_blocks( $block_content ); // fallback for older versions
-            }
-
-            // Get the Block Type:
-            $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
-
-            return 'Block Data: ' . print_r( $block_type, true );
-
             $atts = shortcode_atts( array(
-                'id' => OS_BLOCK_ID,
-            ), $atts, OS_BLOCK_SHORTCODE_ID );
+                // More attrs here
+            ), $atts, 'my_block_shortcode' );
         
-            if ( ! $atts['id'] ) {
-                return 'Block ID not provided.';
-            }
-        
-            $block_id = $atts['id'];
-        
-            ob_start();
-        
-            // Search for the wp_block post type with the block ID
-            $args = array(
-                'post_type' => 'wp_block',
-                'p' => $block_id,
+            // Create the block array
+            $block = array(
+                'blockName' => OS_BLOCK_ID, // Name of your block
+                'attrs' => $atts, // Block attributes
             );
-            $query = new WP_Query( $args );
         
-            if ( $query->have_posts() ) {
-                while ( $query->have_posts() ) {
-                    $query->the_post();
-                    $block_content = get_the_content(); // Block content
-        
-                    // Render the block using do_blocks or render_block (WordPress 5.5+)
-                    if ( function_exists( 'render_block' ) ) {
-                        echo render_block( array( 'blockName' => OS_BLOCK_ID, 'innerHTML' => $block_content ) );
-                    } else {
-                        echo do_blocks( $block_content ); // fallback for older versions
-                    }
-                }
+            // Render the block
+            if ( function_exists( 'render_block' ) ) {
+                return render_block( $block );
             } else {
-                echo 'Block not found.';
+                return do_blocks( $content );
             }
-        
-            wp_reset_postdata();
-        
-            return ob_get_clean();
         }
     }
 }
