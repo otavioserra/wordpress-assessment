@@ -63,9 +63,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
         }
 
 		public function register_blocks(){
-			register_block_type( __DIR__ , array(
-				'render_callback' => 'my_render_callback',
-			) );
+			register_block_type( __DIR__ );
 		}
 
 	}
@@ -77,8 +75,4 @@ if( class_exists( 'Otavio_Serra_Plugin' ) ){
     register_uninstall_hook( __FILE__, array( 'Otavio_Serra_Plugin', 'uninstall' ) );
 
     $Otavio_Serra_Plugin = new Otavio_Serra_Plugin();
-}
-
-function my_render_callback( $attributes, $content ) { // Note the $content parameter!
-	return $content;
 }
