@@ -19,12 +19,22 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
     class Otavio_Serra_Plugin{
 
 		function __construct(){
+            $this->define_constants();
+
 			add_action( 'init', array( $this, 'register_blocks' ) );
 		}
 
-		public static function activate(){
-            update_option( 'rewrite_rules', '' );
+		private function define_constants(){
+            define( 'OS_ID', 'Otavio_Serra_Plugin' );
+            define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
+            define( 'OS_URL', plugin_dir_url( __FILE__ ) );
+        }
 
+		public static function activate(){
+            require_once( OS_PATH . 'includes/class.database.php' );
+
+            update_option( 'rewrite_rules', '' );
+			Database::update_database();
         }
 
         public static function desactivate(){
