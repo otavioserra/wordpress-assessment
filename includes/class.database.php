@@ -2,7 +2,7 @@
 
 if( ! class_exists( 'Database' ) ){
     class Database {
-        public static function update_database() {
+        private static function get_database_scheme(){
             /*
                 template database scheme
                     
@@ -30,6 +30,13 @@ if( ! class_exists( 'Database' ) ){
                     ,
                 )
             );
+
+            return $dataBase;
+        }
+
+        public static function update_database() {
+            // Get database scheme.
+            $dataBase = self::get_database_scheme();
 
             // Require templates class to manipulate table prefix.
             require_once( OS_PATH . 'includes/class.templates.php' );
@@ -100,6 +107,35 @@ if( ! class_exists( 'Database' ) ){
                             }
                         }
                     }
+                }
+            }
+        }
+
+        public static function drop_tables(){
+            // Get database scheme.
+            $dataBase = self::get_database_scheme();
+
+            // Require templates class to manipulate table prefix.
+            require_once( OS_PATH . 'includes/class.templates.php' );
+
+            // Scan all tables.
+            global $wpdb;
+            $all_tables = $wpdb->get_results( "SHOW TABLES", ARRAY_A );
+            
+            if( isset( $dataBase ) )
+            foreach( $dataBase['tables'] as $table => $sql){
+                // Search for the table
+                $foundTable = false;
+                foreach( $all_tables as $table_wp){
+                    if( $table_wp['Tables_in_' . DB_NAME] == $wpdb->prefix . $table ){
+                        $foundTable = true;
+                        break;
+                    }
+                }
+        
+                // Drop table if it exists.
+                if( $foundTable ){
+                    $wpdb->query( 'DROP TABLE `'.$wpdb->prefix.$table.'`' );
                 }
             }
         }

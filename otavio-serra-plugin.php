@@ -28,6 +28,8 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
             define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
+            define( 'OS_ON_DESCTIVATION_DROP_TABLES', false ); // Change to true to drop tables on desactivation.
+            define( 'OS_ON_UNINSTALL_DROP_TABLES', true ); // Change to true to drop tables on uninstall.
         }
 
 		public static function activate(){
@@ -39,10 +41,20 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 
         public static function desactivate(){
             flush_rewrite_rules();
+
+			if( OS_ON_DESCTIVATION_DROP_TABLES ){
+				require_once( OS_PATH . 'includes/class.database.php' );
+
+				Database::drop_tables();
+			}
         }
 
         public static function uninstall(){
-            
+            if( OS_ON_UNINSTALL_DROP_TABLES ){
+				require_once( OS_PATH . 'includes/class.database.php' );
+
+				Database::drop_tables();
+			}
         }
 
 		public function register_blocks(){
