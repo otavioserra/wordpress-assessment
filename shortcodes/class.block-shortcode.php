@@ -27,6 +27,14 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             // Enqueue the block's script (if it has one)
             if ( ! empty( $block_type->view_script ) ) {
                 wp_enqueue_script( $block_type->view_script );
+
+                // Add attributes as inline script, associated with the already enqueued script.
+                $data = sprintf(
+                    'var otavioSerraBlockData = otavioSerraBlockData || {}; otavioSerraBlockData["%s"] = %s;',
+                    esc_js( $unique_id ),
+                    wp_json_encode( $atts )
+                );
+                wp_add_inline_script( $block_type->view_script, $data, 'before' );
             }
 
             // Create a unique ID for the placeholder (important to avoid conflicts)
