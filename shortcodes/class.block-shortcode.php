@@ -7,6 +7,13 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         }
 
         public function add_shortcode( $atts = array() ){
+            // Render the block using do_blocks or render_block (WordPress 5.5+)
+            if ( function_exists( 'render_block' ) ) {
+                return render_block( array( 'blockName' => OS_BLOCK_ID, 'innerHTML' => $block_content ) );
+            } else {
+                return do_blocks( $block_content ); // fallback for older versions
+            }
+
             // Get the Block Type:
             $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
 
