@@ -17,7 +17,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
                 'attrs' => $atts, // Block attributes
             );
 
-            return 'Block String: '.render_block( $block );
+            return 'Block String: '.WP_Block_Type_Registry::get_instance()->get_all_registered().' ### '.render_block( $block );
         
             // Render the block
             if ( function_exists( 'render_block' ) ) {
