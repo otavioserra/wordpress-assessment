@@ -1,9 +1,159 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wa-section-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1f2937;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+}
 
-.wp-block-create-block-wordpress-assessment {
-	border: 1px dotted #f00;
+.wa-header-container {
+    position: relative;
+    z-index: 0;
+    margin-bottom: 1.25rem;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2.75rem;
+    padding-right: 2.75rem;
+}
+
+.wa-header-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    margin-top: 0;
+}
+
+.wa-header-description {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.wa-label {
+    position: absolute;
+    font-size: 0.875rem;
+    color: #4b5563;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-1.25rem) scale(0.75);
+    top: 0.375rem;
+    z-index: -10;
+    transform-origin: 0% 0%;
+}
+
+.wa-input:focus+.wa-label,
+.wa-input:not(:placeholder-shown)+.wa-label {
+    font-weight: 500;
+    transform: translateY(-1.5rem) scale(0.75);
+    color: #3b82f6;
+}
+
+.wa-input:placeholder-shown+.wa-label {
+    transform: translateY(-0.75rem) scale(1);
+}
+
+.wa-input {
+    display: block;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    font-size: 0.875rem;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #4b5563;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.wa-input:focus {
+    outline: none;
+    border-bottom-color: #3b82f6;
+    box-shadow: none;
+}
+
+textarea.wa-input {
+    height: 4rem;
+}
+
+.wa-form-container {
+    max-width: 28rem;
+    margin-left: 2.75rem;
+    margin-right: 2.75rem;
+}
+
+.wa-grid-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .wa-grid-cols-2 {
+        gap: 1.5rem;
+    }
+}
+
+.wa-default-container {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    margin-bottom: 1.50rem;
+}
+
+.wa-button {
+    color: #edeff3;
+    background-color: #1d4ed8;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    text-align: center;
+    transition: background-color 0.15s ease-in-out;
+    border: solid 1px #2563eb;
+    cursor: pointer
+}
+
+.wa-button:hover {
+    background-color: #0c215a;
+    border-color: #98aadb;
+    outline: none;
+    box-shadow: 0 0 0 0.15rem #98aadb;
+}
+
+.wa-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem #3b82f6;
+}
+
+@media (min-width: 640px) {
+    .wa-button {
+        width: auto;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1f2937 inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }

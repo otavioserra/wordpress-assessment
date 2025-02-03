@@ -1,9 +1,13 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import Widget from './components/Widget';
+import './editor.scss';
+import './style.scss';
 
-export default function save() {
+export default function Save() {
+	const blockProps = useBlockProps.save();
 	return (
-		<p {...useBlockProps.save()}>
-			{'Word Press Assessment – hello from the saved content!'}
+		<p {...blockProps}>
+			<Widget />
 		</p>
 	);
 }

@@ -1,12 +1,33 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-assessment-otavio-serra-plugin+.wa-section-container .wa-button {
+    color: #edeff3;
+    background-color: #1d4ed8;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    text-align: center;
+    transition: background-color 0.15s ease-in-out;
+    border: solid 1px #2563eb;
+    cursor: pointer;
+}
 
-.wp-block-create-block-wordpress-assessment {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-assessment-otavio-serra-plugin+.wa-section-container .wa-input {
+    display: block;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    font-size: 0.875rem;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #4b5563;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
 }
