@@ -9,8 +9,6 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       otavio-serra-plugin
- *
- * @package CreateBlock
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,6 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function create_block_otavio_serra_plugin_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ );
 }
 add_action( 'init', 'create_block_otavio_serra_plugin_block_init' );

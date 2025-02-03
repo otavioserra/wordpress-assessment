@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the destination folder where you want to copy the files
-DESTINATION_DIR="/c/Users/otavi/OneDrive/Documentos/Web/wordpress/wp-content/plugins/otavio-serra-plugin.php"
+DESTINATION_DIR="/c/Users/otavi/OneDrive/Documentos/Web/wordpress/wp-content/plugins/otavio-serra-plugin"
 
 # Check if the directory exists
 if [ ! -d "$DESTINATION_DIR" ]; then
