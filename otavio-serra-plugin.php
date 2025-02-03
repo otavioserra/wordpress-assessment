@@ -15,14 +15,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
-function create_block_otavio_serra_plugin_block_init() {
-	register_block_type( __DIR__ );
+if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
+    class Otavio_Serra_Plugin{
+
+		function __construct(){
+			add_action( 'init', array( $this, 'register_blocks' ) );
+		}
+
+		public static function activate(){
+            update_option( 'rewrite_rules', '' );
+
+        }
+
+        public static function desactivate(){
+            flush_rewrite_rules();
+        }
+
+        public static function uninstall(){
+            
+        }
+
+		public function register_blocks(){
+			register_block_type( __DIR__ );
+		}
+
+	}
 }
-add_action( 'init', 'create_block_otavio_serra_plugin_block_init' );
+
+if( class_exists( 'Otavio_Serra_Plugin' ) ){
+    register_activation_hook( __FILE__, array( 'Otavio_Serra_Plugin', 'activate' ) );
+    register_deactivation_hook( __FILE__, array( 'Otavio_Serra_Plugin', 'desactivate' ) );
+    register_uninstall_hook( __FILE__, array( 'Otavio_Serra_Plugin', 'uninstall' ) );
+
+    $Otavio_Serra_Plugin = new Otavio_Serra_Plugin();
+}
