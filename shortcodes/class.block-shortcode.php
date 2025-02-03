@@ -24,7 +24,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             // Get the block type object
             $block_type = WP_Block_Type_Registry::get_instance()->get_registered( OS_BLOCK_ID );
 
-            $content = 'block_type->view_script: ' . $block_type->view_script;
+            $content = 'block_type->view_script: ' . print_r( $block_type, true );
 
             return $content;
 
