@@ -28,7 +28,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
             define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
-            define( 'OS_ON_DESCTIVATION_DROP_TABLES', false ); // Change to true to drop tables on desactivation.
+            define( 'OS_ON_DESCTIVATION_DROP_TABLES', true ); // Change to true to drop tables on desactivation.
             define( 'OS_ON_UNINSTALL_DROP_TABLES', true ); // Change to true to drop tables on uninstall.
         }
 
