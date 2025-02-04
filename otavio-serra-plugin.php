@@ -35,6 +35,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             define( 'OS_BLOCK_SHORTCODE_ID', 'otavio_serra_block' ); // Block shortcode ID.
             define( 'OS_BLOCK_CLASS', 'wa-otavio-serra-block' ); // Used for the shortcode.
             define( 'OS_BLOCK_CONTAINER_CLASS', 'wa-otavio-serra-component-root' ); // Used for the shortcode.
+            define( 'OS_BLOCK_SCRIPT', 'otavio-serra-plugin' ); // Block script.
             define( 'OS_ON_DESCTIVATION_DROP_TABLES', true ); // Change to true to drop tables on desactivation.
             define( 'OS_ON_UNINSTALL_DROP_TABLES', true ); // Change to true to drop tables on uninstall.
         }
