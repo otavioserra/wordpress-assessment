@@ -67,30 +67,6 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 		public function register_blocks(){
 			register_block_type_from_metadata( __DIR__ );
 		}
-
-        public function enqueue_block_assets(){
-            $asset_file = include( OS_PATH . 'build/public-block.asset.php' );
-
-            wp_enqueue_script( 
-                OS_BLOCK_SCRIPT.'-block-script',
-                plugins_url( 'build/public-block.js', __FILE__ ),
-                array( 'wp-element', 'react', 'react-dom' ), 
-                $asset_file['version'], 
-                true 
-            );
-
-            wp_enqueue_style(
-                OS_BLOCK_SCRIPT . '-block-style',
-                plugins_url('build/style-public-block.css', __FILE__),
-                array(),
-                $asset_file['version']
-            );
-        
-            wp_localize_script( OS_BLOCK_SCRIPT.'-block-script', OS_BLOCK_OBJECT, array(
-                'pluginUrl' => plugins_url( '', __FILE__ ),
-                'isAdmin' => is_admin()
-            ) );
-        }
 	}
 }
 
