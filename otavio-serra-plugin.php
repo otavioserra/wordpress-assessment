@@ -70,13 +70,13 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 		}
 
         public function enqueue_block_assets(){
-            $data = include( OS_PATH . 'build/index.asset.php' );
+            $asset_file = include( OS_PATH . 'build/public-block.asset.php' );
 
             wp_enqueue_script( 
                 OS_BLOCK_SCRIPT.'-block-script',
                 plugins_url( 'build/public-block.js', __FILE__ ),
                 array( 'wp-element', 'react', 'react-dom' ), 
-                $data['version'], 
+                $asset_file['version'], 
                 true 
             );
 
@@ -84,7 +84,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
                 OS_BLOCK_SCRIPT . '-block-style',
                 plugins_url('build/style-public-block.css', __FILE__),
                 array(),
-                $data['version']
+                $asset_file['version']
             );
         
             wp_localize_script( OS_BLOCK_SCRIPT.'-block-script', OS_BLOCK_OBJECT, array(
