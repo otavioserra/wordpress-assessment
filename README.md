@@ -1,7 +1,7 @@
 # WordPress-assessment
 I made the solution using both the shortcode and block approach. For inserting the block, is needed to use the block editor for the page/post. To do it click on add a block, and find the name of the block which is "Otávio Serra Plugin Form" located in the widget category, or search for this text on the block's search box. Moreover, I created the shortcode version for the same block. For use is needed to create a new shortcode and inform the name of the shortcode as [otavio_serra_block]. I pushed all my work here in this repository, and tomorrow I'll finish what's needed to finish all the assessments. 
 ## What is missing 
-I think that the main problem was solved today after a lot of time spent in the last 3 days trying to find fixes with conflicts on WordPress, React, and TailwindCSS. I believe that I made 75% of all the solutions I thought. I need more than one day to finish all the solutions I projected. The list of remaining topics is:
+I think that the main problem was solved today after a lot of time spent in the last 3 days trying to find fixes with conflicts on WordPress, React, and TailwindCSS. I believe that I made 75% of all the solutions I thought. I need only more one day to finish all the solutions I projected. The list of remaining topics is:
 * Validate data in the front end and AJAX connections to store data.
 * RESTAPI routes and controllers to store form data sent.
 * Validate data in the backend and store it in the database.
