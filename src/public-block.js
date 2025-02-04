@@ -1,6 +1,5 @@
-import { createElement } from '@wordpress/element';
-import { createRoot } from 'react-dom/client';
-import Widget from './components/Widget';
+import { createElement, createRoot } from '@wordpress/element';
+import Widget from './components/Widget.jsx';
 import { config } from './config';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			blockRoot.appendChild(reactRootContainer);
 
 			const root = createRoot(reactRootContainer);
-			root.render(createElement(Widget));
+			root.render(createElement(Widget, {}));
 		}
 	});
 });

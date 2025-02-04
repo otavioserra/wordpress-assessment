@@ -1,5 +1,5 @@
-// webpack.config.js
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const path = require('path');
 
 module.exports = {
 	...defaultConfig,
@@ -10,5 +10,21 @@ module.exports = {
 	output: {
 		...defaultConfig.output,
 		filename: '[name].js',
+	},
+	module: {
+		...defaultConfig.module,
+		rules: [
+			...defaultConfig.module.rules,
+			{
+				test: /\.(jsx)$/,
+				include: [path.resolve(__dirname, 'src', 'components')],
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@wordpress/babel-preset-default'],
+					},
+				},
+			},
+		],
 	},
 };

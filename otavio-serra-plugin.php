@@ -77,6 +77,13 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
                 '1.0', 
                 true 
             );
+
+            wp_enqueue_style(
+                OS_BLOCK_SCRIPT . '-block-style',
+                plugins_url('build/public-block.css', __FILE__),
+                array(),
+                '1.0'
+            );
         
             wp_localize_script( OS_BLOCK_SCRIPT.'-block-script', OS_BLOCK_OBJECT, array(
                 'pluginUrl' => plugins_url( '', __FILE__ ),
