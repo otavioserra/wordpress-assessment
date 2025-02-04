@@ -5,6 +5,7 @@ export default function Selector({
 	fields,
 	inputLanguage,
 	inputFramework,
+	label,
 	labelLanguage,
 	labelFramework,
 	required,
@@ -33,52 +34,73 @@ export default function Selector({
 		});
 	}
 
+	const classNameLanguage =
+		'wa-select wa-select-margin' +
+		(languageSelected === labelLanguage || !languageSelected
+			? ' wp-select-no-option'
+			: '');
+	const classNameFramework =
+		'wa-select' +
+		(frameworkSelected === labelFramework || !frameworkSelected
+			? ' wp-select-no-option'
+			: '');
+
 	return (
 		<>
 			<select
 				name={inputLanguage}
 				id={inputLanguage}
-				className="wa-input"
+				className={classNameLanguage}
 				required={required}
 				onChange={handleLanguageChange}
 			>
+				<option key={labelLanguage} value={labelLanguage}>
+					{labelLanguage}
+				</option>
 				{fields.map((option) => (
 					<option
-						key={option.value}
-						value={option.value}
+						key={option.language}
+						value={option.language}
 						defaultChecked={
 							languageSelected === option.language ? true : false
 						}
 					>
-						{option.label}
+						{option.language}
 					</option>
 				))}
 			</select>
-			<Label htmlFor={inputLanguage}>{labelLanguage}</Label>
-			{languageSelected && (
+			{frameworks.length > 0 && (
 				<>
 					<select
 						name={inputFramework}
 						id={inputFramework}
-						className="wa-input"
+						className={classNameFramework}
 						required={required}
 						onChange={handleFrameworkChange}
 					>
+						<option key={labelFramework} value={labelFramework}>
+							{labelFramework}
+						</option>
 						{frameworks.map((option) => (
 							<option
-								key={option.value}
-								value={option.value}
+								key={option}
+								value={option}
 								defaultChecked={
 									frameworkSelected === option ? true : false
 								}
 							>
-								{option.label}
+								{option}
 							</option>
 						))}
 					</select>
-					<Label htmlFor={inputFramework}>{labelFramework}</Label>
 				</>
 			)}
+			<Label
+				htmlFor={inputLanguage}
+				className={languageSelected ? 'wa-label-selected' : ''}
+			>
+				{label}
+			</Label>
 		</>
 	);
 }

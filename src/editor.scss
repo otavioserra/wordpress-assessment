@@ -57,6 +57,17 @@
     transform: translateY(-0.75rem) scale(1);
 }
 
+.wa-label.wa-label-selected {
+    font-weight: 500;
+    transform: translateY(-1.5rem) scale(0.75);
+    color: #3b82f6;
+}
+
+.wa-select:focus+.wa-label {
+    color: #3b82f6;
+    transform: translateY(-1.9rem) scale(1);
+}
+
 .wa-input {
     display: block;
     padding-top: 0.5rem;
@@ -82,6 +93,72 @@
 
 textarea.wa-input {
     height: 4rem;
+}
+
+.wa-select {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #4b5563;
+    color: #fff;
+    font-size: 0.875rem;
+    border-radius: 0;
+    padding: 0.625rem;
+    padding-left: 0;
+    padding-right: 2rem;
+    width: 100%;
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='14' height='14' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='white'/></g></svg>") no-repeat;
+    background-position: right 5px top 50%;
+    cursor: pointer;
+}
+
+.wp-select-no-option {
+    color: #4b5563;
+}
+
+.wa-select:focus {
+    color: #fff;
+}
+
+.wa-select-margin {
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.wa-select:focus {
+    outline: none;
+    border-radius: 0.5rem;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.25rem #60a5fa;
+    background-color: #374151;
+    padding-left: 0.625rem;
+}
+
+.dark .wa-select {
+    border-color: #4b5563;
+    color: #e5e7eb;
+}
+
+.dark .wa-select::placeholder {
+    color: #6b7280;
+}
+
+.dark .wa-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.25rem #3b82f6;
+}
+
+.wa-select option {
+    background-color: #ffffff;
+    color: #111827;
+}
+
+.dark .wa-select option {
+    background-color: #374151;
+    color: #e5e7eb;
 }
 
 .wa-form-container {

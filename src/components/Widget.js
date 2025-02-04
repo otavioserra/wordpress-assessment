@@ -90,16 +90,6 @@ export default function Widget() {
 					<Label htmlFor="country">Country</Label>
 				</Div>
 				<Div>
-					<Selector
-						fields={listFields}
-						inputLanguage="language"
-						inputFramework="framework"
-						labelLanguage="Language"
-						labelFramework="Framework"
-						required={true}
-					/>
-				</Div>
-				<Div>
 					<Input
 						type="textarea"
 						name="bioOrResume"
@@ -107,6 +97,17 @@ export default function Widget() {
 						required
 					/>
 					<Label htmlFor="country">Short Bio or Resume</Label>
+				</Div>
+				<Div>
+					<Selector
+						fields={listFields}
+						inputLanguage="language"
+						inputFramework="framework"
+						label="Language & Framework"
+						labelLanguage="Select Language..."
+						labelFramework="Select Framework..."
+						required={true}
+					/>
 				</Div>
 				<Button type="submit">Submit</Button>
 			</Form>
