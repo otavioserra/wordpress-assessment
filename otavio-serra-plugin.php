@@ -80,14 +80,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 
             wp_enqueue_style(
                 OS_BLOCK_SCRIPT . '-block-style',
-                plugins_url('build/public-block.css', __FILE__),
-                array(),
-                '1.0'
-            );
-
-            wp_enqueue_style(
-                OS_BLOCK_SCRIPT . '-index-style',
-                plugins_url('build/index.css', __FILE__),
+                plugins_url('build/style-public-block.css', __FILE__),
                 array(),
                 '1.0'
             );
