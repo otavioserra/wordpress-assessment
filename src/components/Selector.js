@@ -10,30 +10,31 @@ export default function Selector({
 	labelFramework,
 	required,
 }) {
-	const [languageSelected, setLanguageSelected] = useState(false);
-	const [frameworkSelected, setFrameworkSelected] = useState(false);
+	const [languageSelected, setLanguageSelected] = useState(false); // Initialize with labelLanguage
+	const [frameworks, setFrameworks] = useState([]); // Add frameworks state
+	const [frameworkSelected, setFrameworkSelected] = useState(false); // Initialize framework
 
 	function handleLanguageChange(event) {
-		setLanguageSelected(event.target.value);
-	}
+		const selectedLanguage = event.target.value;
+		setLanguageSelected(selectedLanguage);
 
-	function handleFrameworkChange(event) {
-		setFrameworkSelected(event.target.value);
-	}
-
-	let frameworks = [];
-
-	if (languageSelected) {
-		fields.map((option) => {
-			if (option.language === languageSelected) {
-				frameworks = option.frameworks;
+		let newFrameworks = [];
+		fields.forEach((option) => {
+			if (option.language === selectedLanguage) {
+				newFrameworks = option.frameworks;
 				return false;
 			}
 
 			return true;
 		});
+
+		setFrameworks(newFrameworks); // Update the frameworks state
 	}
 
+	function handleFrameworkChange(event) {
+		const selectedFramework = event.target.value;
+		setFrameworkSelected(selectedFramework);
+	}
 	const classNameLanguage =
 		'wa-select wa-select-margin' +
 		(languageSelected === labelLanguage || !languageSelected
@@ -58,13 +59,7 @@ export default function Selector({
 					{labelLanguage}
 				</option>
 				{fields.map((option) => (
-					<option
-						key={option.language}
-						value={option.language}
-						defaultChecked={
-							languageSelected === option.language ? true : false
-						}
-					>
+					<option key={option.language} value={option.language}>
 						{option.language}
 					</option>
 				))}
@@ -82,13 +77,7 @@ export default function Selector({
 							{labelFramework}
 						</option>
 						{frameworks.map((option) => (
-							<option
-								key={option}
-								value={option}
-								defaultChecked={
-									frameworkSelected === option ? true : false
-								}
-							>
+							<option key={option} value={option}>
 								{option}
 							</option>
 						))}

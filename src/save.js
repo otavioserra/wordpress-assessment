@@ -1,13 +1,9 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import Widget from './components/Widget';
-import './editor.scss';
-import './style.scss';
+import { config } from './config';
 
 export default function Save() {
-	const blockProps = useBlockProps.save();
 	return (
-		<p {...blockProps}>
-			<Widget />
-		</p>
+		<div className={config.componentClassId}>
+			<div id={config.componentRootId}></div>
+		</div>
 	);
 }

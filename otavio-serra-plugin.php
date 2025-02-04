@@ -22,6 +22,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             $this->define_constants();
 
 			add_action( 'init', array( $this, 'register_blocks' ) );
+			add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 
 			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
             $Block_Shortcode = new Block_Shortcode();
@@ -33,6 +34,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
             define( 'OS_BLOCK_ID', 'assessment/otavio-serra-plugin' ); // Block ID.
             define( 'OS_BLOCK_SHORTCODE_ID', 'otavio_serra_block' ); // Block shortcode ID.
+            define( 'OS_BLOCK_OBJECT', 'waOtavioSerraPlugin' ); // Block object.
             define( 'OS_ON_DESCTIVATION_DROP_TABLES', true ); // Change to true to drop tables on desactivation.
             define( 'OS_ON_UNINSTALL_DROP_TABLES', true ); // Change to true to drop tables on uninstall.
         }
@@ -66,6 +68,20 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 			register_block_type( __DIR__ );
 		}
 
+        public function enqueue_block_assets(){
+            wp_enqueue_script( 
+                'my-interactive-block-script',
+                plugins_url( 'build/public-block.js', __FILE__ ),
+                array( 'wp-element' ), 
+                '1.0', 
+                true 
+            );
+        
+            wp_localize_script( 'my-interactive-block-script', OS_BLOCK_OBJECT, array(
+                'pluginUrl' => plugins_url( '', __FILE__ ),
+                'isAdmin' => is_admin()
+            ) );
+        }
 	}
 }
 
