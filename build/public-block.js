@@ -637,13 +637,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const blocks = document.querySelectorAll(_config__WEBPACK_IMPORTED_MODULE_3__.config.componentRootId);
+  const blocks = document.querySelectorAll('.' + _config__WEBPACK_IMPORTED_MODULE_3__.config.componentClassId);
   blocks.forEach(block => {
-    const reactRootContainer = document.createElement('div');
-    reactRootContainer.classList.add('react-root');
-    block.appendChild(reactRootContainer);
-    const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(reactRootContainer);
-    root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Widget__WEBPACK_IMPORTED_MODULE_2__["default"]));
+    const blockRoot = block.querySelector('[id^="' + _config__WEBPACK_IMPORTED_MODULE_3__.config.componentRootId + '-"]');
+    if (blockRoot) {
+      const reactRootContainer = document.createElement('div');
+      reactRootContainer.classList.add('react-root');
+      blockRoot.appendChild(reactRootContainer);
+      const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(reactRootContainer);
+      root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Widget__WEBPACK_IMPORTED_MODULE_2__["default"]));
+    } else {
+      console.error('Root element not found within block.');
+    }
   });
 });
 })();

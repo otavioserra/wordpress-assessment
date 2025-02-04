@@ -8,7 +8,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
 
         public function add_shortcode( $atts = array() ){
             return '
-            <div id="wa-otavio-serra-block">
+            <div class="wa-otavio-serra-block">
 			    <div id="wa-otavio-serra-component-root"></div>
 		    </div>';
         }

@@ -4,15 +4,22 @@ import Widget from './components/Widget';
 import { config } from './config';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const blocks = document.querySelectorAll(config.componentRootId);
+	const blocks = document.querySelectorAll('.' + config.componentClassId);
 
-    blocks.forEach((block) => {
-        const reactRootContainer = document.createElement('div');
-        reactRootContainer.classList.add('react-root');
-        block.appendChild(reactRootContainer);
+	blocks.forEach((block) => {
+		const blockRoot = block.querySelector(
+			'[id^="' + config.componentRootId + '-"]'
+		);
 
-        const root = createRoot(reactRootContainer);
+		if (blockRoot) {
+			const reactRootContainer = document.createElement('div');
+			reactRootContainer.classList.add('react-root');
+			blockRoot.appendChild(reactRootContainer);
 
-        root.render(createElement(Widget));
-    });
+			const root = createRoot(reactRootContainer);
+			root.render(createElement(Widget));
+		} else {
+			console.error('Root element not found within block.');
+		}
+	});
 });
