@@ -646,8 +646,6 @@ document.addEventListener('DOMContentLoaded', () => {
       blockRoot.appendChild(reactRootContainer);
       const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(reactRootContainer);
       root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Widget__WEBPACK_IMPORTED_MODULE_2__["default"]));
-    } else {
-      console.error('Root element not found within block.');
     }
   });
 });

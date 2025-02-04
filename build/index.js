@@ -525,11 +525,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Save({
-  attributes,
-  clientId
-}) {
-  const blockRootId = `${_config__WEBPACK_IMPORTED_MODULE_1__.config.componentRootId}-${clientId}`;
+function Save() {
+  const blockRootId = `${_config__WEBPACK_IMPORTED_MODULE_1__.config.componentRootId}-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
     className: _config__WEBPACK_IMPORTED_MODULE_1__.config.componentClassId,

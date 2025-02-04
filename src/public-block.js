@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const root = createRoot(reactRootContainer);
 			root.render(createElement(Widget));
-		} else {
-			console.error('Root element not found within block.');
 		}
 	});
 });
