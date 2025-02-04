@@ -1,19 +1,18 @@
-import ReactDOM from 'react-dom/client';
+import { createElement } from '@wordpress/element';
+import { createRoot } from 'react-dom/client';
 import Widget from './components/Widget';
 import { config } from './config';
 
-function MyInteractiveComponent() {
-	return (
-		<div>
-			<Widget />
-		</div>
-	);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-	const rootElement = document.getElementById(config.componentRootId);
-	if (rootElement) {
-		const root = ReactDOM.createRoot(rootElement);
-		root.render(<MyInteractiveComponent />);
-	}
+    const blocks = document.querySelectorAll(config.componentRootId);
+
+    blocks.forEach((block) => {
+        const reactRootContainer = document.createElement('div');
+        reactRootContainer.classList.add('react-root');
+        block.appendChild(reactRootContainer);
+
+        const root = createRoot(reactRootContainer);
+
+        root.render(createElement(Widget));
+    });
 });
