@@ -16,8 +16,10 @@ function renderWidget(container) {
 document.addEventListener('DOMContentLoaded', () => {
 	const blocks = document.querySelectorAll('.' + config.componentClassId);
 
-	blocks.forEach(block => {
-		const container = block.querySelector('.' + config.componentContainerClass);
+	blocks.forEach((block) => {
+		const container = block.querySelector(
+			'.' + config.componentContainerClass
+		);
 		renderWidget(container);
 	});
 });
