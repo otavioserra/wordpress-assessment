@@ -5,6 +5,26 @@ import Section from './Section';
 import Form from './Form';
 import Button from './Button';
 import FormHeader from './FormHeader';
+import Selector from './Selector';
+
+const listFields = [
+	{
+		language: 'PHP',
+		frameworks: ['Laravel', 'Symfony'],
+	},
+	{
+		language: 'Java',
+		frameworks: ['Struts', 'Grails'],
+	},
+	{
+		language: 'JavaScript',
+		frameworks: ['React', 'Angular', 'Node'],
+	},
+	{
+		language: ' C#',
+		frameworks: ['ASP.NET', 'Blazor'],
+	},
+];
 
 export default function Widget() {
 	return (
@@ -68,6 +88,16 @@ export default function Widget() {
 						required
 					/>
 					<Label htmlFor="country">Country</Label>
+				</Div>
+				<Div>
+					<Selector
+						fields={listFields}
+						inputLanguage="language"
+						inputFramework="framework"
+						labelLanguage="Language"
+						labelFramework="Framework"
+						required={true}
+					/>
 				</Div>
 				<Div>
 					<Input
