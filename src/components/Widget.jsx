@@ -6,6 +6,7 @@ import Form from './Form';
 import Button from './Button';
 import FormHeader from './FormHeader';
 import Selector from './Selector';
+import '../style.scss';
 
 const listFields = [
 	{
