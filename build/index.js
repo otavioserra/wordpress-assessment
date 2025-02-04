@@ -685,7 +685,7 @@ __webpack_require__.r(__webpack_exports__);
 });
 
 // Enqueue script conditionally (only on front end)
-if (!waOtavioSerraPlugin.isAdmin) {
+if (typeof waOtavioSerraPlugin !== 'undefined' && !waOtavioSerraPlugin.isAdmin) {
   wp.element.useEffect(() => {
     const publicBlockScript = document.createElement('script');
     publicBlockScript.src = `${waOtavioSerraPlugin.pluginUrl}/build/public-block.js`;
