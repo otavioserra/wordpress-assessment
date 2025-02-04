@@ -6,11 +6,8 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             add_shortcode( OS_BLOCK_SHORTCODE_ID, array( $this, 'add_shortcode' ) );
         }
 
-        public function add_shortcode( $atts = array() ){
-            return '
-            <div class="wa-otavio-serra-block">
-			    <div id="wa-otavio-serra-component-root"></div>
-		    </div>';
+        public function add_shortcode($atts = array()){
+            return '<div class="' . esc_attr(OS_BLOCK_CLASS) . '"><div class="' . esc_attr(OS_BLOCK_CONTAINER_CLASS) . '"></div></div>';
         }
     }
 }

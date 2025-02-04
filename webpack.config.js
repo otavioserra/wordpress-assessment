@@ -16,12 +16,16 @@ module.exports = {
 		rules: [
 			...defaultConfig.module.rules,
 			{
-				test: /\.(jsx)$/,
-				include: [path.resolve(__dirname, 'src', 'components')],
+				test: /\.(js|jsx)$/,
+				include: [
+					path.resolve(__dirname, 'src')
+				],
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: ['@wordpress/babel-preset-default'],
+						presets: [
+							'@wordpress/babel-preset-default',
+						],
 					},
 				},
 			},

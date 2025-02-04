@@ -466,8 +466,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   config: () => (/* binding */ config)
 /* harmony export */ });
 const config = {
-  componentRootId: 'wa-otavio-serra-component-root',
-  componentClassId: 'wa-otavio-serra-block'
+  componentClassId: 'wa-otavio-serra-block',
+  componentContainerClass: 'wa-otavio-serra-component-root'
 };
 
 /***/ }),
@@ -519,12 +519,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Save() {
-  const blockRootId = `${_config__WEBPACK_IMPORTED_MODULE_2__.config.componentRootId}-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(),
     className: _config__WEBPACK_IMPORTED_MODULE_2__.config.componentClassId
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    id: blockRootId
+    className: _config__WEBPACK_IMPORTED_MODULE_2__.config.componentContainerClass
   }));
 }
 

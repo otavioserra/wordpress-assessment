@@ -466,8 +466,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   config: () => (/* binding */ config)
 /* harmony export */ });
 const config = {
-  componentRootId: 'wa-otavio-serra-component-root',
-  componentClassId: 'wa-otavio-serra-block'
+  componentClassId: 'wa-otavio-serra-block',
+  componentContainerClass: 'wa-otavio-serra-component-root'
 };
 
 /***/ }),
@@ -1944,17 +1944,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function renderWidget(container) {
+  if (container) {
+    const reactRootContainer = document.createElement('div');
+    reactRootContainer.classList.add('react-root');
+    container.appendChild(reactRootContainer);
+    const root = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createRoot)(reactRootContainer);
+    root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Widget_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
+  }
+}
 document.addEventListener('DOMContentLoaded', () => {
   const blocks = document.querySelectorAll('.' + _config__WEBPACK_IMPORTED_MODULE_2__.config.componentClassId);
   blocks.forEach(block => {
-    const blockRoot = block.querySelector('[id^="' + _config__WEBPACK_IMPORTED_MODULE_2__.config.componentRootId + '-"]');
-    if (blockRoot) {
-      const reactRootContainer = document.createElement('div');
-      reactRootContainer.classList.add('react-root');
-      blockRoot.appendChild(reactRootContainer);
-      const root = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createRoot)(reactRootContainer);
-      root.render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Widget_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
-    }
+    const container = block.querySelector('.' + _config__WEBPACK_IMPORTED_MODULE_2__.config.componentContainerClass);
+    renderWidget(container);
   });
 });
 })();
