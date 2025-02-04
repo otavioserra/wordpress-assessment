@@ -22,7 +22,6 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             $this->define_constants();
 
 			add_action( 'init', array( $this, 'register_blocks' ) );
-			add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_block_assets' ) );
 
 			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
@@ -74,7 +73,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             wp_enqueue_script( 
                 OS_BLOCK_SCRIPT.'-block-script',
                 plugins_url( 'build/public-block.js', __FILE__ ),
-                array( 'wp-element' ), 
+                array( 'wp-element', 'react', 'react-dom' ), 
                 '1.0', 
                 true 
             );
