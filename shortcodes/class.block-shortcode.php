@@ -24,7 +24,14 @@ if( ! class_exists( 'Block_Shortcode' ) ){
             );
 
             wp_enqueue_style(
-                OS_BLOCK_SCRIPT . '-block-style',
+                OS_BLOCK_SCRIPT . '-block-index',
+                OS_URL . 'build/index.css',
+                array(),
+                $asset_file['version']
+            );
+
+            wp_enqueue_style(
+                OS_BLOCK_SCRIPT . '-block-style-index',
                 OS_URL . 'build/style-index.css',
                 array(),
                 $asset_file['version']
