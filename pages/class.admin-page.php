@@ -39,7 +39,7 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 				"SELECT * 
 				FROM {$wpdb->prefix}wa_form_submissions 
 				ORDER BY date DESC",
-				array( $date )
+				array()
 			);
 			$form_submissions = $wpdb->get_results( $query, ARRAY_A );
 
