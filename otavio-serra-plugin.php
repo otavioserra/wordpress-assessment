@@ -22,6 +22,9 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 		function __construct(){
             $this->define_constants();
 
+			require_once( OS_PATH . 'controllers/class.block-controller.php' );
+            $Block_Controller = new Block_Controller();
+
 			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
             $Block_Shortcode = new Block_Shortcode();
             
