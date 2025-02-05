@@ -6,6 +6,8 @@ I think that the main problem was solved today after a lot of time spent in the 
 * RESTAPI routes and controllers to store form data sent.
 * Validate data in the backend and store it in the database.
 * Admin page to get data from the database and build one table to store all data: **DONE**.
+* Update language and framework source from database: **DONE**.
+* Get language and framework data from the database using the REST API route and controller to compute it: **DONE**.
 * API external connection to fetch data from third-party API (e.g., Gravatar).
 * PLUS: Internacionalization of string using poedit and i18n functions.
 * PLUS: Add unit tests to validate the plugin’s functionality.

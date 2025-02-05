@@ -1,3 +1,4 @@
+import { useState, useEffect } from '@wordpress/element';
 import Input from './Input';
 import Label from './Label';
 import Div from './Div';
@@ -8,26 +9,104 @@ import FormHeader from './FormHeader';
 import Selector from './Selector';
 import '../style.scss';
 
-const listFields = [
-	{
-		language: 'PHP',
-		frameworks: ['Laravel', 'Symfony'],
-	},
-	{
-		language: 'Java',
-		frameworks: ['Struts', 'Grails'],
-	},
-	{
-		language: 'JavaScript',
-		frameworks: ['React', 'Angular', 'Node'],
-	},
-	{
-		language: ' C#',
-		frameworks: ['ASP.NET', 'Blazor'],
-	},
-];
-
 export default function Widget() {
+	const [languagesAndFrameworks, setLanguagesAndFrameworks] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	useEffect(() => {
+		const fetchWpApiData = async () => {
+			try {
+				if (typeof wpApiSettings === 'undefined') {
+					throw new Error(
+						'wpApiSettings is not defined.  Make sure the script is localized correctly.'
+					);
+				}
+
+				const dataResponse = await fetch(
+					`${wpApiSettings.root}otavio-serra/v1/languages-frameworks`,
+					{
+						headers: {
+							'X-WP-Nonce': wpApiSettings.nonce,
+						},
+					}
+				);
+
+				if (!dataResponse.ok) {
+					const errorData = await dataResponse.json(); // Try to get more specific error info
+					throw new Error(
+						`HTTP error! status: ${dataResponse.status}, message: ${errorData?.message || 'Unknown error'}`
+					);
+				}
+
+				if (dataResponse && dataResponse.nonce) {
+					wpApiSettings.nonce = dataResponse.nonce;
+				} else {
+					console.error('Nonce not returned from server.');
+				}
+
+				const data = await dataResponse.json();
+				setLanguagesAndFrameworks(data.languagesAndFrameworks);
+			} catch (err) {
+				console.error('Error fetching data:', err);
+				setError(err.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchWpApiData();
+	}, []);
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		if (typeof wpApiSettings === 'undefined') {
+			console.error('wpApiSettings is not defined.');
+			return; // Stop submission
+		}
+
+		try {
+			const formData = new FormData(event.target);
+			const submitResponse = await fetch(
+				`${wpApiSettings.root}otavio-serra/v1/submit-form`,
+				{
+					method: 'POST',
+					headers: {
+						'X-WP-Nonce': wpApiSettings.nonce,
+					},
+					body: formData,
+				}
+			);
+
+			if (!submitResponse.ok) {
+				const errorData = await submitResponse.json();
+				throw new Error(
+					`HTTP error! status: ${submitResponse.status}, message: ${errorData?.message || 'Unknown error'}`
+				);
+			}
+
+			if (submitResponse && submitResponse.nonce) {
+				wpApiSettings.nonce = submitResponse.nonce;
+			} else {
+				console.error('Nonce not returned from server.');
+			}
+
+			const submitData = await submitResponse.json();
+			console.log('Form submitted successfully:', submitData);
+		} catch (errorReturn) {
+			console.error('Error submitting form:', errorReturn);
+		}
+	};
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
+
 	return (
 		<>
 			<Div
@@ -39,7 +118,7 @@ export default function Widget() {
 					Fill all the form and click on submit button to send the
 					form and start to enter in a job assessment
 				</FormHeader>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<Div type="cols-2">
 						<Div>
 							<Input
@@ -111,7 +190,7 @@ export default function Widget() {
 					</Div>
 					<Div>
 						<Selector
-							fields={listFields}
+							fields={languagesAndFrameworks}
 							inputLanguage="language"
 							inputFramework="framework"
 							label="Language & Framework"

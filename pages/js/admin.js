@@ -2,13 +2,9 @@ jQuery(document).ready(function () {
 	const apiVersion = 'v1';
 
 	function more_info(p = {}) {
-		// Get the nonce of plugin.
-		const nonce = jQuery('input[name="otavio-serra-nonce"]').val();
-
 		// Set up the data object.
 		const data = {
 			option: 'more-info',
-			nonce,
 		};
 
 		// Request to get more info.
@@ -30,10 +26,10 @@ jQuery(document).ready(function () {
 				if (response.status === 'OK') {
 				}
 
-				if ('nonce' in response) {
-					jQuery('input[name="otavio-serra-nonce"]').val(
-						response.nonce
-					);
+				if (response && response.nonce) {
+					wpApiSettings.nonce = response.nonce;
+				} else {
+					console.error('Nonce not returned from server.');
 				}
 			})
 			.fail(function (response) {

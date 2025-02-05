@@ -52,14 +52,16 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 		}
 
 		public function ajax_additional_information( $request ) {
+			// Retrieve the nonce from the header
+			$nonce = $request->get_header( 'X-WP-Nonce' );
+
+			// Verify the nonce
+			if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) { // 'wp_rest' is the nonce action
+				return new WP_Error( 'invalid_nonce', 'Invalid nonce', array( 'status' => 403 ) );
+			}
+
 			// Get all sent parameters
 			$params = $request->get_params();
-
-			// Verify nonce
-			$nonce = $params['nonce'];
-			if ( ! wp_verify_nonce( $nonce, 'otavio-serra-nonce' ) ) {
-				return new WP_Error( 'rest_api_nonce_invalid', esc_html__( 'The system did not validate the nonce sent. Please try again or seek help from support.', 'otavio-serra-plugin' ), array( 'status' => 403 ) );
-			}
 
 			// Require database class to manipulate data.
 			require_once( OS_PATH . 'includes/class.database.php' );
@@ -73,7 +75,7 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 			// Response data
 			$response = array(
 				'status'        => 'OK',
-				'nonce'         => wp_create_nonce( 'otavio-serra-nonce' ),
+				'nonce'         => wp_create_nonce( 'wp_rest' ),
 			);
 
 			return rest_ensure_response( $response );

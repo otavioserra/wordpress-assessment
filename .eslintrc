@@ -4,6 +4,7 @@
         "prettier"
     ],
     "rules": {
+        "no-console": "off",
         "prettier/prettier": [
             "error",
             {
@@ -15,6 +16,7 @@
         ]
     },
     "globals": {
-        "waOtavioSerraPlugin": "readonly"
+        "waOtavioSerraPlugin": "readonly",
+        "wpApiSettings": "readonly"
     }
 }
