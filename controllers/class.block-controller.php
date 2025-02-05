@@ -36,7 +36,7 @@ if ( ! class_exists( 'Block_Controller' ) ) {
 						'otavio-serra/v1',
 						'/submit-form',
 						array(
-							'methods'  => WP_REST_Server::CREATEABLE,
+							'methods'  => 'POST',
 							'callback' => array( $this, 'ajax_handle_form_submission' ),
                             'permission_callback' => '__return_true',
 						)
