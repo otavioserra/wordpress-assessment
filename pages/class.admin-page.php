@@ -44,7 +44,7 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 			$form_submissions = $wpdb->get_results( $query, ARRAY_A );
 
 			// Check if there are any records.
-			if( $form_submissions ){
+			if( ! empty( $form_submissions ) ){
 				$flag_registers_founded = true;
 			}
 
