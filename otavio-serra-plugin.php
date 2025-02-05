@@ -25,7 +25,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
             $Block_Shortcode = new Block_Shortcode();
             
-            require_once( CS_PATH . 'pages/class.admin-page.php' );
+            require_once( OS_PATH . 'pages/class.admin-page.php' );
             $this->objects['Admin_Page'] = new Admin_Page();
             
 			add_action( 'init', array( $this, 'register_blocks' ) );
@@ -36,7 +36,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             if( ! function_exists('get_plugin_data') ){
                 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
             }
-            
+
             $plugin_data = get_plugin_data( __FILE__ );
 
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
