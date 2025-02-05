@@ -33,6 +33,10 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 		}
 
 		private function define_constants(){
+            if( ! function_exists('get_plugin_data') ){
+                require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+            }
+            
             $plugin_data = get_plugin_data( __FILE__ );
 
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
