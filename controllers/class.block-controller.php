@@ -65,19 +65,19 @@ if ( ! class_exists( 'Block_Controller' ) ) {
             $results = $wpdb->get_results( $query, ARRAY_A );
 
             $languages = [];
-            foreach ( $results as $row ) {
-                $language_name  = $row['language_name'];
+            foreach ($results as $row) {
+                $language_name = $row['language_name'];
                 $framework_name = $row['framework_name'];
 
-                if (! isset( $languages[ $language_name ] ) ) {
-                    $languages[ $language_name ] = [
-                        'language'  => $language_name,
-                        'frameworks' => [],
+                if (!isset($languages[$language_name])) {
+                    $languages[$language_name] = [
+                        'language' => $language_name,
+                        'frameworks' => [], // Initialize as an empty array ALWAYS
                     ];
                 }
 
-                if ( $framework_name ) {
-                    $languages[ $language_name ]['frameworks'] = $framework_name;
+                if ($framework_name) {
+                    $languages[$language_name]['frameworks'][] = $framework_name;
                 }
             }
 

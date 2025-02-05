@@ -15,6 +15,8 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         public function enqueue_block_assets() {
             $asset_file = include( OS_PATH . 'build/public-block.asset.php' );
 
+            wp_enqueue_script( 'wp-api' );
+
             wp_enqueue_script(
                 OS_BLOCK_SCRIPT . '-block-script',
                 OS_URL . 'build/public-block.js',
