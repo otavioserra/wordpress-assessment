@@ -1,6 +1,6 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { apiFetch } from '@wordpress/api-fetch';
+import apiFetch from '@wordpress/api-fetch';
 import Input from './Input';
 import Label from './Label';
 import Div from './Div';
@@ -42,7 +42,7 @@ export default function Widget() {
 				console.error('Error fetching data:', err);
 				setError(
 					err.message ||
-						`HTTP error! status: ${err.data?.status || 'Unknown'}`
+					`HTTP error! status: ${err.data?.status || 'Unknown'}`
 				);
 			} finally {
 				setLoading(false);
@@ -155,7 +155,7 @@ export default function Widget() {
 			console.error('Error submitting form:', errorReturn);
 			setError(
 				errorReturn.message ||
-					`HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`
+				`HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`
 			);
 		} finally {
 			setLoading(false);
