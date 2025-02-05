@@ -1,7 +1,8 @@
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import Label from './Label';
+import Div from './Div';
 
-export default function Selector({
+function Selector({
 	fields,
 	inputLanguage,
 	inputFramework,
@@ -12,95 +13,92 @@ export default function Selector({
 	errorLanguage,
 	errorFramework,
 }) {
-	const [languageSelected, setLanguageSelected] = useState(false); // Initialize with labelLanguage
-	const [frameworks, setFrameworks] = useState([]); // Add frameworks state
-	const [frameworkSelected, setFrameworkSelected] = useState(false); // Initialize framework
+	const [selectedLanguage, setSelectedLanguage] = useState('');
+	const [selectedFramework, setSelectedFramework] = useState('');
+	const [availableFrameworks, setAvailableFrameworks] = useState([]);
 
-	function handleLanguageChange(event) {
-		const selectedLanguage = event.target.value;
-		setLanguageSelected(selectedLanguage);
+	const languages = fields.map((field) => field.language);
 
-		let newFrameworks = [];
-		fields.forEach((option) => {
-			if (option.language === selectedLanguage) {
-				newFrameworks = option.frameworks;
-				return false;
+	useEffect(() => {
+		if (selectedLanguage) {
+			const selectedLanguageData = fields.find(
+				(field) => field.language === selectedLanguage
+			);
+			if (selectedLanguageData) {
+				setAvailableFrameworks(selectedLanguageData.frameworks);
+			} else {
+				setAvailableFrameworks([]);
 			}
+			setSelectedFramework('');
+		} else {
+			setAvailableFrameworks([]);
+		}
+	}, [selectedLanguage, fields]);
 
-			return true;
-		});
+	const handleLanguageChange = (event) => {
+		setSelectedLanguage(event.target.value);
+	};
 
-		setFrameworks(newFrameworks); // Update the frameworks state
-	}
-
-	function handleFrameworkChange(event) {
-		const selectedFramework = event.target.value;
-		setFrameworkSelected(selectedFramework);
-	}
-	const classNameLanguage =
-		'wa-select wa-select-margin' +
-		(languageSelected === labelLanguage || !languageSelected
-			? ' wp-select-no-option'
-			: '') +
-		(errorLanguage ? ' wa-input-error' : '');
-
-	const classNameFramework =
-		'wa-select' +
-		(frameworkSelected === labelFramework || !frameworkSelected
-			? ' wp-select-no-option'
-			: '') +
-		(errorFramework ? ' wa-input-error' : '');
+	const handleFrameworkChange = (event) => {
+		setSelectedFramework(event.target.value);
+	};
 
 	return (
-		<>
-			<select
-				name={inputLanguage}
-				id={inputLanguage}
-				className={classNameLanguage}
-				required={required}
-				onChange={handleLanguageChange}
-			>
-				<option key={labelLanguage} value={labelLanguage}>
-					{labelLanguage}
-				</option>
-				{fields.map((option) => (
-					<option key={option.language} value={option.language}>
-						{option.language}
+		<Div>
+			<Div className="wa-default-container">
+				<Label htmlFor={inputLanguage}>{labelLanguage}</Label>
+				<select
+					name={inputLanguage}
+					id={inputLanguage}
+					className={`wa-select wa-select-margin ${errorLanguage ? 'wa-input-error' : ''}`}
+					required={required}
+					value={selectedLanguage}
+					onChange={handleLanguageChange}
+				>
+					<option value="" disabled>
+						{labelLanguage}
 					</option>
-				))}
-			</select>
-			{errorLanguage && (
-				<div className="error-message">{errorLanguage}</div>
-			)}
-			{frameworks.length > 0 && (
-				<>
-					<select
-						name={inputFramework}
-						id={inputFramework}
-						className={classNameFramework}
-						required={required}
-						onChange={handleFrameworkChange}
-					>
-						<option key={labelFramework} value={labelFramework}>
-							{labelFramework}
+					{languages.map((lang) => (
+						<option key={lang} value={lang}>
+							{lang}
 						</option>
-						{frameworks.map((option) => (
-							<option key={option} value={option}>
-								{option}
-							</option>
-						))}
-					</select>
-					{errorFramework && (
-						<div className="error-message">{errorFramework}</div>
-					)}
-				</>
-			)}
+					))}
+				</select>
+				{errorLanguage && (
+					<div className="error-message">{errorLanguage}</div>
+				)}
+			</Div>
+			<Div className="wa-default-container">
+				<Label htmlFor={inputFramework}>{labelFramework}</Label>
+				<select
+					name={inputFramework}
+					id={inputFramework}
+					className={`wa-select ${errorFramework ? 'wa-input-error' : ''}`}
+					required={required}
+					value={selectedFramework}
+					onChange={handleFrameworkChange}
+				>
+					<option value="" disabled>
+						{labelFramework}
+					</option>
+					{availableFrameworks.map((framework) => (
+						<option key={framework} value={framework}>
+							{framework}
+						</option>
+					))}
+				</select>
+				{errorFramework && (
+					<div className="error-message">{errorFramework}</div>
+				)}
+			</Div>
 			<Label
 				htmlFor={inputLanguage}
-				className={languageSelected ? 'wa-label-selected' : ''}
+				className={selectedLanguage ? 'wa-label-selected' : ''}
 			>
 				{label}
 			</Label>
-		</>
+		</Div>
 	);
 }
+
+export default Selector;

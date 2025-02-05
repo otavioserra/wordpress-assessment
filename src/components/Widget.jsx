@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import Input from './Input';
@@ -19,8 +19,13 @@ export default function Widget() {
 	const [formErrors, setFormErrors] = useState({});
 	const [formSubmitted, setFormSubmitted] = useState(false);
 	const [successMessage, setSuccessMessage] = useState('');
+	const firstNameInputRef = useRef(null);
 
 	useEffect(() => {
+		if (firstNameInputRef.current) {
+			firstNameInputRef.current.focus();
+		}
+
 		const fetchWpApiData = async () => {
 			setLoading(true);
 			try {
@@ -42,7 +47,7 @@ export default function Widget() {
 				console.error('Error fetching data:', err);
 				setError(
 					err.message ||
-					`HTTP error! status: ${err.data?.status || 'Unknown'}`
+						`HTTP error! status: ${err.data?.status || 'Unknown'}`
 				);
 			} finally {
 				setLoading(false);
@@ -135,11 +140,16 @@ export default function Widget() {
 			return;
 		}
 
+		const urlEncodedData = new URLSearchParams(formData).toString();
+
 		try {
 			await apiFetch({
 				path: '/otavio-serra/v1/submit-form',
 				method: 'POST',
-				data: formData,
+				data: urlEncodedData,
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
 			});
 
 			setSuccessMessage(
@@ -148,6 +158,7 @@ export default function Widget() {
 					'otavio-serra-plugin'
 				)
 			);
+
 			setFormSubmitted(true);
 			event.target.reset();
 			setFormErrors({});
@@ -155,7 +166,7 @@ export default function Widget() {
 			console.error('Error submitting form:', errorReturn);
 			setError(
 				errorReturn.message ||
-				`HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`
+					`HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`
 			);
 		} finally {
 			setLoading(false);
