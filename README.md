@@ -5,7 +5,7 @@ I think that the main problem was solved today after a lot of time spent in the 
 * Validate data in the front end and AJAX connections to store data.
 * RESTAPI routes and controllers to store form data sent.
 * Validate data in the backend and store it in the database.
-* Admin page to get data from the database and build one table to store all data.
+* Admin page to get data from the database and build one table to store all data: **DONE**.
 * API external connection to fetch data from third-party API (e.g., Gravatar).
 * PLUS: Internacionalization of string using poedit and i18n functions.
 * PLUS: Add unit tests to validate the plugin’s functionality.
