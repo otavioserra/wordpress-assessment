@@ -30,7 +30,39 @@ if( ! class_exists( 'Database' ) ){
                             PRIMARY KEY (`id_wa_form_submissions`))
                         ENGINE = InnoDB'
                     ,
-                )
+                    'wa_languages' => 'CREATE TABLE IF NOT EXISTS `#prefix#wa_languages` (
+                        `id_language` INT NOT NULL AUTO_INCREMENT,
+                        `language_name` VARCHAR(100) NULL,
+                        PRIMARY KEY (`id_language`))
+                    ENGINE = InnoDB'
+                    ,
+                    'wa_frameworks' => 'CREATE TABLE IF NOT EXISTS `#prefix#wa_frameworks` (
+                        `id_framework` INT NOT NULL AUTO_INCREMENT,
+                        `framework_name` VARCHAR(100) NULL,
+                        `id_language` INT NULL,
+                        PRIMARY KEY (`id_framework`),
+                        FOREIGN KEY (`id_language`) REFERENCES `#prefix#wa_languages`(`id_language`))
+                    ENGINE = InnoDB'
+                ),
+                'inserts' => array(
+                    'wa_languages' => array(
+                        "INSERT INTO `#prefix#wa_languages` (`language_name`) VALUES ('PHP')",
+                        "INSERT INTO `#prefix#wa_languages` (`language_name`) VALUES ('Java')",
+                        "INSERT INTO `#prefix#wa_languages` (`language_name`) VALUES ('JavaScript')",
+                        "INSERT INTO `#prefix#wa_languages` (`language_name`) VALUES ('C#')",
+                    ),
+                    'wa_frameworks' => array(
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Laravel', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'PHP'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Symfony', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'PHP'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Struts', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'Java'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Grails', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'Java'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('React', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'JavaScript'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Angular', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'JavaScript'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Node', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'JavaScript'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('ASP.NET', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'C#'))",
+                        "INSERT INTO `#prefix#wa_frameworks` (`framework_name`, `id_language`) VALUES ('Blazor', (SELECT `id_language` FROM `#prefix#wa_languages` WHERE `language_name` = 'C#'))",
+                    ),
+                ),
             );
 
             return $dataBase;
@@ -61,7 +93,7 @@ if( ! class_exists( 'Database' ) ){
                 // Create table if it does not exist, otherwise update fields.
                 if( ! $foundTable ){
                     // Create table
-                    $sql = Templates::change_variable( $sql, '#prefix#', $wpdb->prefix );
+                    $sql = Templates::change_variable_all( $sql, '#prefix#', $wpdb->prefix );
                     $wpdb->query( $sql );
                 } else {
                     // Get all fields from the table.
@@ -108,6 +140,18 @@ if( ! class_exists( 'Database' ) ){
                                     
                             }
                         }
+                    }
+                }
+            }
+
+            // Inserting standard data.
+            foreach( $dataBase['inserts'] as $table => $inserts ) {
+                $tableNameWithPrefix = $wpdb->prefix . $table;
+                $count = $wpdb->get_var( "SELECT COUNT(*) FROM {$tableNameWithPrefix}" );
+                if( $count == 0 ) {
+                    foreach( $inserts as $insertSQL ) {
+                        $insertSQL = Templates::change_variable_all( $insertSQL, '#prefix#', $wpdb->prefix );
+                        $wpdb->query( $insertSQL );
                     }
                 }
             }
