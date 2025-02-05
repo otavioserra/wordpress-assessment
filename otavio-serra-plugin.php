@@ -17,18 +17,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
     class Otavio_Serra_Plugin{
+        public $objects = array();
 
 		function __construct(){
             $this->define_constants();
 
-			add_action( 'init', array( $this, 'register_blocks' ) );
-
 			require_once( OS_PATH . 'shortcodes/class.block-shortcode.php' );
             $Block_Shortcode = new Block_Shortcode();
+            
+            require_once( CS_PATH . 'pages/class.admin-page.php' );
+            $this->objects['Admin_Page'] = new Admin_Page();
+            
+			add_action( 'init', array( $this, 'register_blocks' ) );
+            add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		}
 
 		private function define_constants(){
+            $plugin_data = get_plugin_data( __FILE__ );
+
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
+            define( 'OS_VERSION', $plugin_data['Version'] );
+            define( 'OS_DEBUG', true );
             define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
             define( 'OS_BLOCK_ID', 'assessment/otavio-serra-plugin' ); // Block ID.
@@ -68,6 +77,17 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 		public function register_blocks(){
 			register_block_type_from_metadata( __DIR__ );
 		}
+
+        public function admin_menu(){
+            add_menu_page(
+                esc_html__( 'Otavio Serra Plugin', 'otavio-serra-plugin' ),
+                esc_html__( 'Otavio Serra Plugin', 'otavio-serra-plugin' ),
+                'manage_options',
+                'otavio_serra_admin',
+                array( $this->objects['Admin_Page'], 'page' ),
+                'dashicons-id-alt'
+            );
+        }
 	}
 }
 

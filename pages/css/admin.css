@@ -1,0 +1,86 @@
+.wa-table-container {
+    position: relative;
+    overflow-x: auto;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+}
+
+@media (min-width: 640px) {
+    .wa-table-container {
+        border-radius: 0.5rem;
+    }
+}
+
+.wa-table {
+    width: 100%;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.rtl.wa-table {
+    text-align: right;
+}
+
+.wa-table th,
+.wa-table td {
+    padding: 0.9375rem 1.5rem;
+}
+
+.wa-table thead {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #374151;
+    background-color: #f9f9f9;
+}
+
+.dark.wa-table thead {
+    background-color: #374151;
+    color: #9ca3af;
+}
+
+.wa-table tbody tr {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.dark.wa-table tbody tr {
+    background-color: #1f2937;
+    border-bottom-color: #374151;
+}
+
+.wa-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.dark.wa-table tbody tr:hover {
+    background-color: #374151;
+}
+
+.wa-table tbody th {
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.dark.wa-table tbody th {
+    color: #ffffff;
+}
+
+.wa-table a {
+    font-weight: 500;
+    color: #2563eb;
+    text-decoration: none;
+    transition: text-decoration 0.15s ease-in-out;
+}
+
+.dark.wa-table a {
+    color: #3b82f6;
+}
+
+.wa-table a:hover {
+    text-decoration: underline;
+}
+
+.wa-table-more-info{
+    /* display: none; */
+}
