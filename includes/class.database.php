@@ -23,6 +23,8 @@ if( ! class_exists( 'Database' ) ){
                             `birthdate` DATE NULL,
                             `email` VARCHAR(255) NULL,
                             `country` VARCHAR(100) NULL,
+                            `language` VARCHAR(100) NULL,
+                            `framework` VARCHAR(100) NULL,
                             `bioOrResume` MEDIUMTEXT NULL,
                             `date_creation` DATETIME NULL,
                             PRIMARY KEY (`id_wa_form_submissions`))

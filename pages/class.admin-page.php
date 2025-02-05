@@ -30,6 +30,24 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 			wp_enqueue_style( 'otavio-serra-plugin-admin', OS_URL . 'pages/css/admin.css', array(), ( OS_DEBUG ? filemtime( OS_PATH . 'pages/css/admin.css' ) : OS_VERSION ) );
 			wp_enqueue_script( 'otavio-serra-plugin-admin', OS_URL . 'pages/js/admin.js', array( 'jquery' ), ( OS_DEBUG ? filemtime( OS_PATH . 'pages/js/admin.js' ) : OS_VERSION ) );
 
+			// Set the flag to show the alert.
+			$flag_registers_founded = false;
+
+			// Get the data from the database.
+			global $wpdb;
+			$query = $wpdb->prepare(
+				"SELECT * 
+				FROM {$wpdb->prefix}wa_form_submissions 
+				ORDER BY date DESC",
+				array( $date )
+			);
+			$form_submissions = $wpdb->get_results( $query, ARRAY_A );
+
+			// Check if there are any records.
+			if( $form_submissions ){
+				$flag_registers_founded = true;
+			}
+
 			require OS_PATH . 'views/view.admin-page.php';
 		}
 

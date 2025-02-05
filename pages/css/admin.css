@@ -1,6 +1,7 @@
 .wa-table-container {
 	position: relative;
 	overflow-x: auto;
+	margin: 1rem 1rem 0 0;
 	box-shadow:
 		0 4px 6px -1px rgb(0 0 0 / 0.1),
 		0 2px 4px -1px rgb(0 0 0 / 0.06);
@@ -85,4 +86,33 @@
 
 .wa-table-more-info {
 	/* display: none; */
+}
+
+.wa-alert {
+	display: flex;
+	padding: 1rem;
+	margin: 1rem 1rem 0 0;
+	font-size: 0.875rem;
+	color: #60a5fa;
+	border-radius: 0.5rem;
+	background-color: #27303b;
+}
+
+.wa-alert-icon {
+	flex-shrink: 0;
+	width: 1rem;
+	height: 1rem;
+	margin-right: 0.75rem;
+	margin-top: 0.125rem;
+}
+
+.wa-alert-title {
+	font-weight: 500;
+}
+
+.wa-alert-list {
+	margin-top: 0.375rem;
+	list-style-type: disc;
+	list-style-position: inside;
+	padding-left: 1.25rem;
 }
