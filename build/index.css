@@ -333,4 +333,14 @@ input[type=date]::-webkit-calendar-picker-indicator {
   margin-left: 1.25rem;
 }
 
+.wa-input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 /*# sourceMappingURL=index.css.map*/

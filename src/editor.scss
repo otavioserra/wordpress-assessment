@@ -321,3 +321,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	list-style-type: disc;
 	margin-left: 1.25rem;
 }
+
+.wa-input-error {
+	border-color: red;
+}
+
+.error-message {
+	color: red;
+	font-size: 12px;
+	margin-top: 5px;
+}

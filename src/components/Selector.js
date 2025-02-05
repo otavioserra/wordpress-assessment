@@ -9,6 +9,8 @@ export default function Selector({
 	labelLanguage,
 	labelFramework,
 	required,
+	errorLanguage,
+	errorFramework,
 }) {
 	const [languageSelected, setLanguageSelected] = useState(false); // Initialize with labelLanguage
 	const [frameworks, setFrameworks] = useState([]); // Add frameworks state
@@ -39,12 +41,15 @@ export default function Selector({
 		'wa-select wa-select-margin' +
 		(languageSelected === labelLanguage || !languageSelected
 			? ' wp-select-no-option'
-			: '');
+			: '') +
+		(errorLanguage ? ' wa-input-error' : '');
+
 	const classNameFramework =
 		'wa-select' +
 		(frameworkSelected === labelFramework || !frameworkSelected
 			? ' wp-select-no-option'
-			: '');
+			: '') +
+		(errorFramework ? ' wa-input-error' : '');
 
 	return (
 		<>
@@ -64,6 +69,9 @@ export default function Selector({
 					</option>
 				))}
 			</select>
+			{errorLanguage && (
+				<div className="error-message">{errorLanguage}</div>
+			)}
 			{frameworks.length > 0 && (
 				<>
 					<select
@@ -82,6 +90,9 @@ export default function Selector({
 							</option>
 						))}
 					</select>
+					{errorFramework && (
+						<div className="error-message">{errorFramework}</div>
+					)}
 				</>
 			)}
 			<Label

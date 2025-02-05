@@ -1,5 +1,6 @@
-export default function Input({ type, name, placeholder, required }) {
+export default function Input({ type, name, placeholder, required, error }) {
 	let input;
+	const className = `wa-input ${error ? 'wa-input-error' : ''}`;
 
 	switch (type) {
 		case 'textarea':
@@ -7,10 +8,10 @@ export default function Input({ type, name, placeholder, required }) {
 				<textarea
 					name={name}
 					id={name}
-					className="wa-input"
+					className={className}
 					placeholder={placeholder}
 					required={required}
-				></textarea>
+				/>
 			);
 			break;
 		default:
@@ -19,12 +20,17 @@ export default function Input({ type, name, placeholder, required }) {
 					type={type}
 					name={name}
 					id={name}
-					className="wa-input"
+					className={className}
 					placeholder={placeholder}
 					required={required}
 				/>
 			);
 	}
 
-	return input;
+	return (
+		<>
+			{input}
+			{error && <div className="error-message">{error}</div>}
+		</>
+	);
 }

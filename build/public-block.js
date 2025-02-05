@@ -14,16 +14,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Input */ "./src/components/Input.js");
-/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Label */ "./src/components/Label.js");
-/* harmony import */ var _Div__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Div */ "./src/components/Div.js");
-/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Section */ "./src/components/Section.js");
-/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Form */ "./src/components/Form.js");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Button */ "./src/components/Button.js");
-/* harmony import */ var _FormHeader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormHeader */ "./src/components/FormHeader.js");
-/* harmony import */ var _Selector__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Selector */ "./src/components/Selector.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../style.scss */ "./src/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Input */ "./src/components/Input.js");
+/* harmony import */ var _Label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Label */ "./src/components/Label.js");
+/* harmony import */ var _Div__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Div */ "./src/components/Div.js");
+/* harmony import */ var _Section__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Section */ "./src/components/Section.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Form */ "./src/components/Form.js");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Button */ "./src/components/Button.js");
+/* harmony import */ var _FormHeader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FormHeader */ "./src/components/FormHeader.js");
+/* harmony import */ var _Selector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Selector */ "./src/components/Selector.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../style.scss */ "./src/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -74,14 +77,55 @@ function Widget() {
     };
     fetchWpApiData();
   }, []);
+  const [formErrors, setFormErrors] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({});
+  const validateForm = formData => {
+    const errors = {};
+    if (!formData.get('first_name')) {
+      errors.first_name = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('First name is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('last_name')) {
+      errors.last_name = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Last name is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('phone')) {
+      errors.phone = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Phone number is required.', 'otavio-serra-plugin');
+    } else if (!/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/.test(formData.get('phone'))) {
+      errors.phone = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Invalid phone number format. Use XXX-XXX-XXXX', 'otavio-serra-plugin');
+    }
+    if (!formData.get('birthdate')) {
+      errors.birthdate = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Birthdate is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('email')) {
+      errors.email = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Email is required.', 'otavio-serra-plugin');
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get('email'))) {
+      errors.email = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Invalid email format.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('country')) {
+      errors.country = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Country is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('bioOrResume')) {
+      errors.bioOrResume = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bio or resume is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('language')) {
+      errors.language = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Language is required.', 'otavio-serra-plugin');
+    }
+    if (!formData.get('framework')) {
+      errors.framework = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Framework is required.', 'otavio-serra-plugin');
+    }
+    return errors;
+  };
   const handleSubmit = async event => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const errors = validateForm(formData);
+    setFormErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
     if (typeof wpApiSettings === 'undefined') {
       console.error('wpApiSettings is not defined.');
-      return; // Stop submission
+      return;
     }
     try {
-      const formData = new FormData(event.target);
       const submitResponse = await fetch(`${wpApiSettings.root}otavio-serra/v1/submit-form`, {
         method: 'POST',
         headers: {
@@ -105,30 +149,30 @@ function Widget() {
     }
   };
   if (loading) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
       className: "loading-container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("h5", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h5", {
         className: "loading-title",
-        children: "Loading..."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading…', 'otavio-serra-plugin')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("p", {
         className: "loading-text",
-        children: "Fetching data..."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Fetching data…', 'otavio-serra-plugin')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
         className: "loading-spinner-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("svg", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("svg", {
           "aria-hidden": "true",
           className: "loading-spinner",
           viewBox: "0 0 100 101",
           fill: "none",
           xmlns: "http://www.w3.org/2000/svg",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("path", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("path", {
             d: "M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z",
             fill: "currentColor"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("path", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("path", {
             d: "M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z",
             fill: "currentFill"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
           className: "sr-only",
           children: "Loading..."
         })]
@@ -136,131 +180,140 @@ function Widget() {
     });
   }
   if (error) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
       className: "error-alert",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("svg", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("svg", {
         className: "error-icon",
         "aria-hidden": "true",
         xmlns: "http://www.w3.org/2000/svg",
         fill: "currentColor",
         viewBox: "0 0 20 20",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("path", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("path", {
           d: "M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
         className: "sr-only",
-        children: "Error"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Error', 'otavio-serra-plugin')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
           className: "error-title",
-          children: "Error: problems rendering the form. Try again later."
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Error: problems rendering the form. Try again later.', 'otavio-serra-plugin')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("p", {
           children: error
         })]
       })]
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
       type: "class",
       className: "wp-block-assessment-otavio-serra-plugin"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Section__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_FormHeader__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        title: "Interview Development Position",
-        children: "Fill all the form and click on submit button to send the form and start to enter in a job assessment"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Form__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Section__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_FormHeader__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Interview Development Position', 'otavio-serra-plugin'),
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Fill all the form and click on submit button to send the form and start to enter in a job assessment', 'otavio-serra-plugin')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Form__WEBPACK_IMPORTED_MODULE_6__["default"], {
         onSubmit: handleSubmit,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "cols-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
               type: "text",
               name: "first_name",
               placeholder: " ",
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              required: true,
+              error: formErrors.first_name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
               htmlFor: "first_name",
-              children: "First Name"
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('First Name', 'otavio-serra-plugin')
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
               type: "text",
               name: "last_name",
               placeholder: " ",
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              required: true,
+              error: formErrors.first_name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
               htmlFor: "last_name",
-              children: "Last Name"
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Last Name', 'otavio-serra-plugin')
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
           type: "cols-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
               type: "tel",
               pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}",
               name: "phone",
               placeholder: " ",
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              required: true,
+              error: formErrors.first_name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
               htmlFor: "phone",
-              children: "Phone Number"
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Phone Number', 'otavio-serra-plugin')
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
               type: "date",
               name: "birthdate",
               value: "",
               placeholder: null,
-              required: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              required: true,
+              error: formErrors.first_name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
               htmlFor: "birthdate",
-              children: "Birthdate"
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Birthdate', 'otavio-serra-plugin')
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
             type: "email",
             name: "email",
             placeholder: " ",
-            required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            required: true,
+            error: formErrors.first_name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
             htmlFor: "email",
-            children: "Email Address"
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Email Address', 'otavio-serra-plugin')
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
             type: "text",
             name: "country",
             placeholder: " ",
-            required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            required: true,
+            error: formErrors.first_name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
             htmlFor: "country",
-            children: "Country"
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Country', 'otavio-serra-plugin')
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
             type: "textarea",
             name: "bioOrResume",
             placeholder: " ",
-            required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            required: true,
+            error: formErrors.first_name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Label__WEBPACK_IMPORTED_MODULE_3__["default"], {
             htmlFor: "country",
-            children: "Short Bio or Resume"
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Short Bio or Resume', 'otavio-serra-plugin')
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Div__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Selector__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Div__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Selector__WEBPACK_IMPORTED_MODULE_9__["default"], {
             fields: languagesAndFrameworks,
             inputLanguage: "language",
             inputFramework: "framework",
-            label: "Language & Framework",
-            labelLanguage: "Select Language...",
-            labelFramework: "Select Framework...",
-            required: true
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Language & Framework', 'otavio-serra-plugin'),
+            labelLanguage: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Language…', 'otavio-serra-plugin'),
+            labelFramework: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Framework…', 'otavio-serra-plugin'),
+            required: true,
+            errorLanguage: formErrors.language,
+            errorFramework: formErrors.framework
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
           type: "submit",
-          children: "Submit"
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Submit', 'otavio-serra-plugin')
         })]
       })]
     })]
@@ -408,15 +461,17 @@ function Input({
   type,
   name,
   placeholder,
-  required
+  required,
+  error
 }) {
   let input;
+  const className = `wa-input ${error ? 'wa-input-error' : ''}`;
   switch (type) {
     case 'textarea':
       input = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
         name: name,
         id: name,
-        className: "wa-input",
+        className: className,
         placeholder: placeholder,
         required: required
       });
@@ -426,12 +481,14 @@ function Input({
         type: type,
         name: name,
         id: name,
-        className: "wa-input",
+        className: className,
         placeholder: placeholder,
         required: required
       });
   }
-  return input;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, input, error && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "error-message"
+  }, error));
 }
 
 /***/ }),
@@ -515,7 +572,9 @@ function Selector({
   label,
   labelLanguage,
   labelFramework,
-  required
+  required,
+  errorLanguage,
+  errorFramework
 }) {
   const [languageSelected, setLanguageSelected] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false); // Initialize with labelLanguage
   const [frameworks, setFrameworks] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]); // Add frameworks state
@@ -538,8 +597,8 @@ function Selector({
     const selectedFramework = event.target.value;
     setFrameworkSelected(selectedFramework);
   }
-  const classNameLanguage = 'wa-select wa-select-margin' + (languageSelected === labelLanguage || !languageSelected ? ' wp-select-no-option' : '');
-  const classNameFramework = 'wa-select' + (frameworkSelected === labelFramework || !frameworkSelected ? ' wp-select-no-option' : '');
+  const classNameLanguage = 'wa-select wa-select-margin' + (languageSelected === labelLanguage || !languageSelected ? ' wp-select-no-option' : '') + (errorLanguage ? ' wa-input-error' : '');
+  const classNameFramework = 'wa-select' + (frameworkSelected === labelFramework || !frameworkSelected ? ' wp-select-no-option' : '') + (errorFramework ? ' wa-input-error' : '');
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     name: inputLanguage,
     id: inputLanguage,
@@ -552,7 +611,9 @@ function Selector({
   }, labelLanguage), fields.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: option.language,
     value: option.language
-  }, option.language))), frameworks.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+  }, option.language))), errorLanguage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "error-message"
+  }, errorLanguage), frameworks.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     name: inputFramework,
     id: inputFramework,
     className: classNameFramework,
@@ -564,7 +625,9 @@ function Selector({
   }, labelFramework), frameworks.map(option => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: option,
     value: option
-  }, option)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, option))), errorFramework && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "error-message"
+  }, errorFramework)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
     htmlFor: inputLanguage,
     className: languageSelected ? 'wa-label-selected' : ''
   }, label));
@@ -2021,6 +2084,16 @@ module.exports = window["React"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
 
 /***/ })
 
