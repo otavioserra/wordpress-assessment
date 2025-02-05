@@ -40,7 +40,10 @@ export default function Widget() {
 				setLanguagesAndFrameworks(processedLanguages);
 			} catch (err) {
 				console.error('Error fetching data:', err);
-				setError(err.message || `HTTP error! status: ${err.data?.status || 'Unknown'}`);
+				setError(
+					err.message ||
+						`HTTP error! status: ${err.data?.status || 'Unknown'}`
+				);
 			} finally {
 				setLoading(false);
 			}
@@ -139,13 +142,21 @@ export default function Widget() {
 				data: formData,
 			});
 
-			setSuccessMessage(__('Form submitted successfully! We will contact you soon.', 'otavio-serra-plugin'));
+			setSuccessMessage(
+				__(
+					'Form submitted successfully! We will contact you soon.',
+					'otavio-serra-plugin'
+				)
+			);
 			setFormSubmitted(true);
 			event.target.reset();
 			setFormErrors({});
 		} catch (errorReturn) {
 			console.error('Error submitting form:', errorReturn);
-			setError(errorReturn.message || `HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`);
+			setError(
+				errorReturn.message ||
+					`HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`
+			);
 		} finally {
 			setLoading(false);
 		}
@@ -348,7 +359,10 @@ export default function Widget() {
 
 	return (
 		<>
-			<Div type="class" className="wp-block-assessment-otavio-serra-plugin" />
+			<Div
+				type="class"
+				className="wp-block-assessment-otavio-serra-plugin"
+			/>
 			{content}
 		</>
 	);
