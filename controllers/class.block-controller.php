@@ -9,21 +9,6 @@ if ( ! class_exists( 'Block_Controller' ) ) {
 				function () {
 					register_rest_route(
 						'otavio-serra/v1',
-						'/settings',
-						array(
-							'methods'  => WP_REST_Server::READABLE,
-							'callback' => function () {
-                                return [
-                                    'root' => rest_url('wp/v2/'),
-                                    'nonce' => wp_create_nonce('wp_rest'),
-                                ];
-                            },
-                            'permission_callback' => '__return_true',
-						)
-					);
-
-					register_rest_route(
-						'otavio-serra/v1',
 						'/languages-frameworks',
 						array(
 							'methods'  => WP_REST_Server::READABLE,
@@ -51,7 +36,7 @@ if ( ! class_exists( 'Block_Controller' ) ) {
 
             // Verify the nonce
             if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) { // 'wp_rest' is the nonce action
-                return new WP_Error( 'invalid_nonce', 'Invalid nonce', array( 'status' => 403 ) );
+                return new WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'otavio-serra-plugin' ), array( 'status' => 403 ) );
             }
 
             // Get languages and frameworks from the database.
@@ -85,32 +70,113 @@ if ( ! class_exists( 'Block_Controller' ) ) {
             $languagesAndFrameworks = array_values( $languages );
 
             $response = array(
+                'status' => 'OK',
                 'languagesAndFrameworks' => ( ! empty( $languagesAndFrameworks ) ? $languagesAndFrameworks : [] ),
-                'nonce' => wp_create_nonce( 'wp_rest' ),
             );
 
             return rest_ensure_response( $response );
         }
 
         public function ajax_handle_form_submission( WP_REST_Request $request ) {
-            // Retrieve the nonce from the header
+            // Verify the nonce.
             $nonce = $request->get_header( 'X-WP-Nonce' );
-
-            // Verify the nonce
-            if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) { // 'wp_rest' is the nonce action
-                return new WP_Error( 'invalid_nonce', 'Invalid nonce', array( 'status' => 403 ) );
+            if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+                return new WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'otavio-serra-plugin' ), array( 'status' => 403 ) );
             }
 
-            // Get all sent parameters
             $params = $request->get_params();
 
-            // Insert the data into the database
+            // --- VALIDATION AND SANITIZATION ---
 
-            $response = array(
-                'nonce' => wp_create_nonce( 'wp_rest' ),
+            $first_name = sanitize_text_field( $params['first_name'] ?? '' );
+            $last_name  = sanitize_text_field( $params['last_name'] ?? '' );
+            $phone      = sanitize_text_field( $params['phone'] ?? '' );
+            $birthdate  = sanitize_text_field( $params['birthdate'] ?? '' );
+            $email      = sanitize_email( $params['email'] ?? '' );
+            $country    = sanitize_text_field( $params['country'] ?? '' );
+            $bio        = sanitize_textarea_field( $params['bioOrResume'] ?? '' );
+            $language   = sanitize_text_field( $params['language'] ?? '' );
+            $framework  = sanitize_text_field( $params['framework'] ?? '' );
+
+            // Validation (AFTER sanitization).
+            $errors = [];
+
+            if ( empty( $first_name ) ) {
+                $errors['first_name'] = __( 'First name is required.', 'otavio-serra-plugin' );
+            }
+            if ( empty( $last_name ) ) {
+                $errors['last_name'] = __( 'Last name is required.', 'otavio-serra-plugin' );
+            }
+            if ( empty( $phone ) ) {
+                $errors['phone'] = __( 'Phone number is required.', 'otavio-serra-plugin' );
+            } elseif ( ! preg_match( '/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/', $phone ) ) {
+                $errors['phone'] = __( 'Invalid phone number format. Use XXX-XXX-XXXX', 'otavio-serra-plugin' );
+            }
+
+            if ( empty( $birthdate ) ) {
+                $errors['birthdate'] = __( 'Birthdate is required.', 'otavio-serra-plugin' );
+            } elseif ( ! preg_match( '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $birthdate ) ) {
+                $errors['birthdate'] = __( 'Invalid date format.  Use YYYY-MM-DD.', 'otavio-serra-plugin' );
+            }
+            // Convert and validate birthdate using DateTime (BEST PRACTICE)
+            $birthdate_obj = DateTime::createFromFormat( 'Y-m-d', $birthdate );
+            if ( ! $birthdate_obj ) {
+                $errors['birthdate'] = __( 'Invalid date.', 'otavio-serra-plugin' );
+            } else {
+                //  convert to MySQL format.
+                $birthdate = $birthdate_obj->format( 'Y-m-d' );
+            }
+
+            if ( empty( $email ) ) {
+                $errors['email'] = __( 'Email is required.', 'otavio-serra-plugin' );
+            } elseif ( ! is_email( $email ) ) {
+                $errors['email'] = __( 'Invalid email address.', 'otavio-serra-plugin' );
+            }
+
+            if ( empty( $country ) ) {
+                $errors['country'] = __( 'Country is required.', 'otavio-serra-plugin' );
+            }
+            if ( empty( $bio ) ) {
+                $errors['bioOrResume'] = __( 'Bio or resume is required.', 'otavio-serra-plugin' );
+            }
+            if ( empty( $language ) ) {
+                $errors['language'] = __( 'Language is required.', 'otavio-serra-plugin' );
+            }
+            if ( empty( $framework ) ) {
+                $errors['framework'] = __( 'Framework is required.', 'otavio-serra-plugin' );
+            }
+
+            if ( ! empty( $errors ) ) {
+                return new WP_REST_Response( array( 'errors' => $errors ), 400 );
+            }
+
+            // --- DATABASE INSERTION ---
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'wa_form_submissions';
+
+            $result = $wpdb->insert(
+                $table_name,
+                array(
+                    'first_name'            => $first_name,
+                    'last_name'             => $last_name,
+                    'phone'                 => $phone,
+                    'birthdate'             => $birthdate,
+                    'email'                 => $email,
+                    'country'               => $country,
+                    'bioOrResume'           => $bio,
+                    'language'              => $language,
+                    'framework'             => $framework,
+                    'date_creation'         => current_time( 'mysql' ),
+                ),
+                array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
             );
 
-            return rest_ensure_response( $response );
+            if ( $result === false ) {
+                error_log( 'Database error: ' . $wpdb->last_error );
+                return new WP_REST_Response( array( 'message' => __( 'Database error.', 'otavio-serra-plugin' ) ), 500 );
+            }
+
+            return rest_ensure_response( array( 'message' => __( 'Form submitted successfully!', 'otavio-serra-plugin' ) ) );
         }
     }
 }

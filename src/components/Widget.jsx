@@ -1,5 +1,6 @@
 import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { apiFetch } from '@wordpress/api-fetch';
 import Input from './Input';
 import Label from './Label';
 import Div from './Div';
@@ -8,45 +9,24 @@ import Form from './Form';
 import Button from './Button';
 import FormHeader from './FormHeader';
 import Selector from './Selector';
+import SuccessMessage from './SuccessMessage';
 import '../style.scss';
 
 export default function Widget() {
 	const [languagesAndFrameworks, setLanguagesAndFrameworks] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [formErrors, setFormErrors] = useState({});
+	const [formSubmitted, setFormSubmitted] = useState(false);
+	const [successMessage, setSuccessMessage] = useState('');
 
 	useEffect(() => {
 		const fetchWpApiData = async () => {
+			setLoading(true);
 			try {
-				if (typeof wpApiSettings === 'undefined') {
-					throw new Error(
-						'wpApiSettings is not defined.  Make sure the script is localized correctly.'
-					);
-				}
-
-				const dataResponse = await fetch(
-					`${wpApiSettings.root}otavio-serra/v1/languages-frameworks`,
-					{
-						headers: {
-							'X-WP-Nonce': wpApiSettings.nonce,
-						},
-					}
-				);
-
-				if (!dataResponse.ok) {
-					const errorData = await dataResponse.json(); // Try to get more specific error info
-					throw new Error(
-						`HTTP error! status: ${dataResponse.status}, message: ${errorData?.message || 'Unknown error'}`
-					);
-				}
-
-				const data = await dataResponse.json();
-
-				if (data && data.nonce) {
-					wpApiSettings.nonce = data.nonce;
-				} else {
-					console.error('Nonce not returned from server.');
-				}
+				const data = await apiFetch({
+					path: '/otavio-serra/v1/languages-frameworks',
+				});
 
 				const processedLanguages = data.languagesAndFrameworks.map(
 					(language) => ({
@@ -60,16 +40,16 @@ export default function Widget() {
 				setLanguagesAndFrameworks(processedLanguages);
 			} catch (err) {
 				console.error('Error fetching data:', err);
-				setError(err.message);
+				setError(err.message || `HTTP error! status: ${err.data?.status || 'Unknown'}`);
 			} finally {
 				setLoading(false);
 			}
 		};
 
-		fetchWpApiData();
-	}, []);
-
-	const [formErrors, setFormErrors] = useState({});
+		if (languagesAndFrameworks.length === 0 && !formSubmitted) {
+			fetchWpApiData();
+		}
+	}, [formSubmitted, languagesAndFrameworks.length]);
 
 	const validateForm = (formData) => {
 		const errors = {};
@@ -139,6 +119,8 @@ export default function Widget() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setLoading(true);
+		setError(null);
 
 		const formData = new FormData(event.target);
 		const errors = validateForm(formData);
@@ -146,49 +128,33 @@ export default function Widget() {
 		setFormErrors(errors);
 
 		if (Object.keys(errors).length > 0) {
-			return;
-		}
-
-		if (typeof wpApiSettings === 'undefined') {
-			console.error('wpApiSettings is not defined.');
+			setLoading(false);
 			return;
 		}
 
 		try {
-			const submitResponse = await fetch(
-				`${wpApiSettings.root}otavio-serra/v1/submit-form`,
-				{
-					method: 'POST',
-					headers: {
-						'X-WP-Nonce': wpApiSettings.nonce,
-					},
-					body: formData,
-				}
-			);
+			await apiFetch({
+				path: '/otavio-serra/v1/submit-form',
+				method: 'POST',
+				data: formData,
+			});
 
-			if (!submitResponse.ok) {
-				const errorData = await submitResponse.json();
-				throw new Error(
-					`HTTP error! status: ${submitResponse.status}, message: ${errorData?.message || 'Unknown error'}`
-				);
-			}
-
-			const data = await submitResponse.json();
-
-			if (data && data.nonce) {
-				wpApiSettings.nonce = data.nonce;
-			} else {
-				console.error('Nonce not returned from server.');
-			}
-
-			console.log('Form submitted successfully:', data);
+			setSuccessMessage(__('Form submitted successfully! We will contact you soon.', 'otavio-serra-plugin'));
+			setFormSubmitted(true);
+			event.target.reset();
+			setFormErrors({});
 		} catch (errorReturn) {
 			console.error('Error submitting form:', errorReturn);
+			setError(errorReturn.message || `HTTP error! status: ${errorReturn.data?.status || 'Unknown'}`);
+		} finally {
+			setLoading(false);
 		}
 	};
 
+	let content;
+
 	if (loading) {
-		return (
+		content = (
 			<div className="loading-container">
 				<h5 className="loading-title">
 					{__('Loading…', 'otavio-serra-plugin')}
@@ -217,10 +183,8 @@ export default function Widget() {
 				</div>
 			</div>
 		);
-	}
-
-	if (error) {
-		return (
+	} else if (error) {
+		content = (
 			<div className="error-alert">
 				<svg
 					className="error-icon"
@@ -245,14 +209,10 @@ export default function Widget() {
 				</div>
 			</div>
 		);
-	}
-
-	return (
-		<>
-			<Div
-				type="class"
-				className="wp-block-assessment-otavio-serra-plugin"
-			></Div>
+	} else if (formSubmitted) {
+		content = <SuccessMessage message={successMessage} />;
+	} else {
+		content = (
 			<Section>
 				<FormHeader
 					title={__(
@@ -285,7 +245,7 @@ export default function Widget() {
 								name="last_name"
 								placeholder=" "
 								required
-								error={formErrors.first_name}
+								error={formErrors.last_name}
 							/>
 							<Label htmlFor="last_name">
 								{__('Last Name', 'otavio-serra-plugin')}
@@ -300,7 +260,7 @@ export default function Widget() {
 								name="phone"
 								placeholder=" "
 								required
-								error={formErrors.first_name}
+								error={formErrors.phone}
 							/>
 							<Label htmlFor="phone">
 								{__('Phone Number', 'otavio-serra-plugin')}
@@ -313,7 +273,7 @@ export default function Widget() {
 								value=""
 								placeholder={null}
 								required
-								error={formErrors.first_name}
+								error={formErrors.birthdate}
 							/>
 							<Label htmlFor="birthdate">
 								{__('Birthdate', 'otavio-serra-plugin')}
@@ -326,7 +286,7 @@ export default function Widget() {
 							name="email"
 							placeholder=" "
 							required
-							error={formErrors.first_name}
+							error={formErrors.email}
 						/>
 						<Label htmlFor="email">
 							{__('Email Address', 'otavio-serra-plugin')}
@@ -338,7 +298,7 @@ export default function Widget() {
 							name="country"
 							placeholder=" "
 							required
-							error={formErrors.first_name}
+							error={formErrors.country}
 						/>
 						<Label htmlFor="country">
 							{__('Country', 'otavio-serra-plugin')}
@@ -350,7 +310,7 @@ export default function Widget() {
 							name="bioOrResume"
 							placeholder=" "
 							required
-							error={formErrors.first_name}
+							error={formErrors.bioOrResume}
 						/>
 						<Label htmlFor="country">
 							{__('Short Bio or Resume', 'otavio-serra-plugin')}
@@ -383,6 +343,13 @@ export default function Widget() {
 					</Button>
 				</Form>
 			</Section>
+		);
+	}
+
+	return (
+		<>
+			<Div type="class" className="wp-block-assessment-otavio-serra-plugin" />
+			{content}
 		</>
 	);
 }
