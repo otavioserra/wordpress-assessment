@@ -8,8 +8,8 @@ I think that the main problem was solved today after a lot of time spent in the 
 * Admin page to get data from the database and build one table to store all data: **DONE**.
 * Update language and framework source from database: **DONE**.
 * Get language and framework data from the database using the REST API route and controller to compute it: **DONE**.
-* API external connection to fetch data from third-party API (e.g., Gravatar).
-* PLUS: Internacionalization of string using poedit and i18n functions.
+* API external connection to fetch data from third-party API (e.g., Gravatar): **DONE**.
+* PLUS: Internacionalization of string using poedit and i18n functions: **DOING**.
 * PLUS: Add unit tests to validate the plugin’s functionality.
 ## Troubleshooting
 * I faced a lot of problems with TailwindCSS with WordPress default CSS on Sunday. I worked before with TailwindCSS in one React App with no problem, but not in WordPress. I tried a lot of alternatives to not impact CSS WordPress behavior, but with not much time I preferred to leave the TailwindCSS approach and that is why I using Vanilla CSS based on the classes from TailwindCSS. With more time I can adapt my solution to use again this CSS framework, and not impacting CSS WordPress defaults.

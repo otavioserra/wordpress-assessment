@@ -70,7 +70,6 @@ if ( ! class_exists( 'Block_Controller' ) ) {
             $languagesAndFrameworks = array_values( $languages );
 
             $response = array(
-                'status' => 'OK',
                 'languagesAndFrameworks' => ( ! empty( $languagesAndFrameworks ) ? $languagesAndFrameworks : [] ),
             );
 

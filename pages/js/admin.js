@@ -1,8 +1,8 @@
 jQuery(document).ready(function ($) {
-	const infoButtons = document.querySelectorAll('.more-info-button');
-	const spinnerWrapper = document.querySelector('.wa-spinner-wrapper');
 
-	infoButtons.forEach((button) => {
+	const infoButtons = document.querySelectorAll('.more-info-button');
+
+	infoButtons.forEach(button => {
 		button.addEventListener('click', async (event) => {
 			const submissionId = event.target.dataset.id;
 
@@ -11,19 +11,24 @@ jQuery(document).ready(function ($) {
 				return;
 			}
 
-			const container = document.querySelector(
-				`.gravatar-info-container[data-id="${submissionId}"]`
-			);
+			const container = document.querySelector(`.gravatar-info-container[data-id="${submissionId}"]`);
 			if (!container) {
 				console.error('Container not found for ID:', submissionId);
 				return;
 			}
 
+			// Hide button
 			event.target.style.display = 'none';
 
-			// Clone the spinner
-			const spinnerClone = spinnerWrapper.firstElementChild.cloneNode(true);
-			container.appendChild(spinnerClone);
+			const spinnerWrapper = document.querySelector('.wa-spinner-wrapper');
+			let spinnerClone;
+			if (spinnerWrapper && spinnerWrapper.firstElementChild) {
+				spinnerClone = spinnerWrapper.firstElementChild.cloneNode(true);
+				container.appendChild(spinnerClone);
+			} else {
+				console.error('Spinner wrapper or its content not found!');
+				container.innerHTML = `<p>${wp.i18n.__('Loading...', 'otavio-serra-plugin')}</p>`;
+			}
 
 			try {
 				const response = await wp.apiFetch({
@@ -31,23 +36,55 @@ jQuery(document).ready(function ($) {
 					method: 'GET',
 				});
 
+				container.innerHTML = '';
+
 				if (response && response.thumbnailUrl) {
-					container.innerHTML = `
-                        <img src="${response.thumbnailUrl}" alt="Gravatar">
-                        <p><strong>Display Name:</strong> ${response.displayName || 'N/A'}</p>
-                        <p><strong>About Me:</strong> ${response.aboutMe || 'N/A'}</p>
-                        <p><strong>Profile URL:</strong> <a href="${response.profileUrl || '#'}" target="_blank">${response.profileUrl || 'N/A'}</a></p>
-                    `;
+					const img = document.createElement('img');
+					img.src = response.thumbnailUrl;
+					img.alt = 'Gravatar';
+					container.appendChild(img);
+
+					const displayNameP = document.createElement('p');
+					const displayNameStrong = document.createElement('strong');
+					displayNameStrong.textContent = wp.i18n.__('Display Name:', 'otavio-serra-plugin') + ' ';
+					displayNameP.appendChild(displayNameStrong);
+					displayNameP.appendChild(document.createTextNode(response.displayName || wp.i18n.__('N/A', 'otavio-serra-plugin')));
+					container.appendChild(displayNameP);
+
+					const aboutMeP = document.createElement('p');
+					const aboutMeStrong = document.createElement('strong');
+					aboutMeStrong.textContent = wp.i18n.__('About Me:', 'otavio-serra-plugin') + ' ';
+					aboutMeP.appendChild(aboutMeStrong);
+					aboutMeP.appendChild(document.createTextNode(response.aboutMe || wp.i18n.__('N/A', 'otavio-serra-plugin')));
+					container.appendChild(aboutMeP);
+
+					const profileUrlP = document.createElement('p');
+					const profileUrlStrong = document.createElement('strong');
+					profileUrlStrong.textContent = wp.i18n.__('Profile URL:', 'otavio-serra-plugin') + ' ';
+					profileUrlP.appendChild(profileUrlStrong);
+					const profileLink = document.createElement('a');
+					const profileUrl = response.profileUrl || '#';
+					profileLink.href = profileUrl;
+					profileLink.target = '_blank';
+					profileLink.textContent = profileUrl !== '#' ? response.profileUrl : wp.i18n.__('N/A', 'otavio-serra-plugin');
+					profileUrlP.appendChild(profileLink);
+					container.appendChild(profileUrlP);
+
 				} else {
-					container.innerHTML = `<p>No Gravatar found.</p>`;
+					const noGravatarP = document.createElement('p');
+					noGravatarP.textContent = wp.i18n.__('No Gravatar found.', 'otavio-serra-plugin');
+					container.appendChild(noGravatarP);
 				}
+
 			} catch (error) {
 				console.error('Error fetching Gravatar info:', error);
-				container.innerHTML = `<p style="color: red;">Error: ${error.message || 'Could not fetch Gravatar data.'}</p>`;
+				container.innerHTML = `<p style="color: red;">${wp.i18n.__('Error:', 'otavio-serra-plugin')} ${error.message || wp.i18n.__('Could not fetch Gravatar data.', 'otavio-serra-plugin')}</p>`;
+
 			} finally {
 				event.target.style.display = 'inline-block';
-				//Remove the clone
-				container.querySelector('.loading-spinner')?.remove();
+				if (spinnerClone && container.contains(spinnerClone)) {
+					container.removeChild(spinnerClone);
+				}
 			}
 		});
 	});

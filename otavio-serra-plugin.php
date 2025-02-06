@@ -34,6 +34,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
             
 			add_action( 'init', array( $this, 'register_blocks' ) );
             add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+            add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 		}
 
 		private function define_constants(){
@@ -95,6 +96,10 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
                 array( $this->objects['Admin_Page'], 'page' ),
                 'dashicons-id-alt'
             );
+        }
+
+        public function load_textdomain() {
+            load_plugin_textdomain( 'otavio-serra-plugin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
         }
 	}
 }
