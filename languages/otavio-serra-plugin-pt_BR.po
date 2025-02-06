@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-06 14:19-0300\n"
+"POT-Creation-Date: 2025-02-06 15:44-0300\n"
 "PO-Revision-Date: \n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -94,19 +94,19 @@ msgstr "Formulário enviado com sucesso!"
 msgid "Otavio Serra Plugin"
 msgstr "Otávio Serra Plugin"
 
-#: pages/class.admin-page.php:57
+#: pages/class.admin-page.php:60
 msgid "Submission ID is required."
 msgstr "É necessário informar o ID de envio."
 
-#: pages/class.admin-page.php:70
+#: pages/class.admin-page.php:73
 msgid "Submission not found."
 msgstr "Envio não encontrado."
 
-#: pages/class.admin-page.php:83
+#: pages/class.admin-page.php:86
 msgid "Error fetching Gravatar data."
 msgstr "Erro ao buscar dados do Gravatar."
 
-#: pages/class.admin-page.php:91
+#: pages/class.admin-page.php:94
 msgid "No Gravatar data found for this email."
 msgstr "Nenhum dado do Gravatar encontrado para este e-mail."
 

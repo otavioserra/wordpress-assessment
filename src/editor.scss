@@ -48,14 +48,14 @@
 	transform-origin: 0% 0%;
 }
 
-.wa-input:focus+.wa-label,
-.wa-input:not(:placeholder-shown)+.wa-label {
+.wa-input:focus + .wa-label,
+.wa-input:not(:placeholder-shown) + .wa-label {
 	font-weight: 500;
 	transform: translateY(-1.5rem) scale(0.75);
 	color: #3b82f6;
 }
 
-.wa-input:placeholder-shown+.wa-label {
+.wa-input:placeholder-shown + .wa-label {
 	transform: translateY(-0.75rem) scale(1);
 }
 
@@ -65,7 +65,7 @@
 	color: #3b82f6;
 }
 
-.wa-select:focus+.wa-label {
+.wa-select:focus + .wa-label {
 	color: #3b82f6;
 	transform: translateY(-1.9rem) scale(1);
 }
@@ -112,7 +112,9 @@ textarea.wa-input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	background: transparent url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='14' height='14' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='white'/></g></svg>") no-repeat;
+	background: transparent
+		url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='14' height='14' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='white'/></g></svg>")
+		no-repeat;
 	background-position: right 5px top 50%;
 	cursor: pointer;
 }
@@ -248,7 +250,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	background-color: #374151;
 	border: 1px solid #374151;
 	border-radius: 0.5rem;
-	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+	box-shadow:
+		0 4px 6px -1px rgb(0 0 0 / 0.1),
+		0 2px 4px -1px rgb(0 0 0 / 0.06);
 }
 
 .loading-title {
@@ -342,7 +346,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 	background-color: #22c55e;
 	border: 1px solid #16a34a;
 	border-radius: 0.5rem;
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	box-shadow:
+		0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .success-title {

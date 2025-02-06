@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Otavio Serra Plugin
  * Description:       WordPress Plugin Development Challenge - The Company requires a form on the website that allows the developers to submit their information to be interviewed for a development position.
- * Version:           0.1.0
+ * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Otávio Campos de Abreu Serra
@@ -46,7 +46,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 
             define( 'OS_ID', 'Otavio_Serra_Plugin' );
             define( 'OS_VERSION', $plugin_data['Version'] );
-            define( 'OS_DEBUG', true );
+            define( 'OS_DEBUG', false );
             define( 'OS_PATH', plugin_dir_path( __FILE__ ) );
             define( 'OS_URL', plugin_dir_url( __FILE__ ) );
             define( 'OS_BLOCK_ID', 'assessment/otavio-serra-plugin' ); // Block ID.
@@ -100,8 +100,7 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
         }
 
         public function load_textdomain() {
-            load_plugin_textdomain( 'otavio-serra-plugin', false, OS_PATH . '/languages/' );
-            add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
+            load_plugin_textdomain( 'otavio-serra-plugin', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
         }
 
         public function enqueue_block_assets() {

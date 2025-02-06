@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "assessment/otavio-serra-plugin",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"title": "Otavio Serra Plugin Form",
 	"category": "widgets",
 	"icon": "id",
@@ -12,11 +12,11 @@
 		"html": false
 	},
 	"textdomain": "otavio-serra-plugin",
-	"editorScript": "file:./build/index.js",
+	"editorScript": "assessment-otavio-serra-plugin-editor",
 	"editorStyle": "file:./build/index.css",
 	"style": [
 		"file:./build/index.css",
 		"file:./build/style-index.css"
 	],
-	"viewScript": "file:./build/public-block.js"
+	"viewScript": "assessment-otavio-serra-plugin-view"
 }
