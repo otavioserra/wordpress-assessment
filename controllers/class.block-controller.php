@@ -179,7 +179,6 @@ if ( ! class_exists( 'Block_Controller' ) ) {
                 );
             }
             
-
             if ( $result === false ) {
                 error_log( 'Database error: ' . $wpdb->last_error );
                 return new WP_REST_Response( array( 'message' => __( 'Database error.', 'otavio-serra-plugin' ) ), 500 );

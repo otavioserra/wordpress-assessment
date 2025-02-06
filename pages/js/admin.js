@@ -1,51 +1,48 @@
-jQuery(document).ready(function () {
-	const apiVersion = 'v1';
+jQuery(document).ready(function ($) {
 
-	function more_info(p = {}) {
-		// Set up the data object.
-		const data = {
-			option: 'more-info',
-		};
+	const infoButtons = document.querySelectorAll('.more-info-button');
 
-		// Request to get more info.
-		jQuery
-			.ajax({
-				url:
-					wpApiSettings.root +
-					'otavio-serra/' +
-					apiVersion +
-					'/admin-page/',
-				method: 'GET',
-				xhrFields: { withCredentials: true },
-				beforeSend: function (xhr) {
-					xhr.setRequestHeader('X-WP-Nonce', wpApiSettings.nonce);
-				},
-				data,
-			})
-			.done(function (response) {
-				if (response.status === 'OK') {
+	infoButtons.forEach(button => {
+		button.addEventListener('click', async (event) => {
+			// Get the ID from the button's data-id attribute
+			const submissionId = event.target.dataset.id;
+
+			if (!submissionId) {
+				console.error('No submission ID found');
+				return;
+			}
+
+			try {
+				// Use apiFetch with the submission ID in the URL
+				const response = await apiFetch({
+					path: `/otavio-serra/v1/gravatar-info/${submissionId}`, // Use the ID in the path
+					method: 'GET', // Keep as GET
+				});
+
+				// Find the container using the SAME ID
+				const container = document.querySelector(`.gravatar-info-container[data-id="${submissionId}"]`);
+
+				if (container) {
+					if (response && response.thumbnailUrl) { // Check if data exists
+						container.innerHTML = `
+                            <img src="${response.thumbnailUrl}" alt="Gravatar">
+                            <p><strong>Display Name:</strong> ${response.displayName || 'N/A'}</p>
+                            <p><strong>About Me:</strong> ${response.aboutMe || 'N/A'}</p>
+                            <p><strong>Profile URL:</strong> <a href="${response.profileUrl || '#'}" target="_blank">${response.profileUrl || 'N/A'}</a></p>
+                        `;  // Add other data as needed
+					} else {
+						container.innerHTML = `<p>No Gravatar found.</p>`;
+					}
 				}
 
-				if (response && response.nonce) {
-					wpApiSettings.nonce = response.nonce;
-				} else {
-					console.error('Nonce not returned from server.');
+			} catch (error) {
+				console.error('Error fetching Gravatar info:', error);
+				// Display an error message, ideally in the container
+				const container = document.querySelector(`.gravatar-info-container[data-id="${submissionId}"]`);
+				if (container) {
+					container.innerHTML = `<p style="color: red;">Error: ${error.message || 'Could not fetch Gravatar data.'}</p>`;
 				}
-			})
-			.fail(function (response) {
-				if ('responseJSON' in response) {
-					console.log(
-						response.status + ': ' + response.responseJSON.message
-					);
-				} else {
-					console.log(response);
-				}
-			});
-	}
-
-	function start() {
-		more_info();
-	}
-
-	start();
+			}
+		});
+	});
 });
