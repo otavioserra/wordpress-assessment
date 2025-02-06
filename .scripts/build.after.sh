@@ -15,7 +15,7 @@ echo "Start copy files to: " . "$DESTINATION_DIR";
 
 # Copy files to the destination folder
 rsync -av --include='/build/' --include='/build/**/*' --exclude='/*' . "$DESTINATION_DIR"
-rsync -av --include='block.json' --include='/otavio-serra-plugin.php' --include='/pages/' --include='/pages/**/*' --include='/controllers/' --include='/controllers/**/*'  --include='/views/' --include='/views/**/*' --exclude='/*' . "$DESTINATION_DIR"
+rsync -av --include='block.json' --include='/otavio-serra-plugin.php' --include='/shortcodes/' --include='/pages/' --include='/pages/**/*' --include='/controllers/' --include='/controllers/**/*'  --include='/views/' --include='/views/**/*' --exclude='/*' . "$DESTINATION_DIR"
 
 echo "End copy";
 exit 0;

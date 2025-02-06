@@ -7,7 +7,7 @@ if( ! class_exists( 'Block_Shortcode' ) ){
         }
 
         public function add_shortcode($atts = array()) {
-            $this->enqueue_block_assets();
+            // $this->enqueue_block_assets();
 
             return '<div class="' . esc_attr(OS_BLOCK_CLASS) . '"><div class="' . esc_attr(OS_BLOCK_CONTAINER_CLASS) . '"></div></div>';
         }
