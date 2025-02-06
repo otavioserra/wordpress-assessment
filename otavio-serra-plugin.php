@@ -84,7 +84,8 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
         }
 
 		public function register_blocks(){
-			register_block_type_from_metadata( __DIR__ );
+			register_block_type_from_metadata( OS_PATH );
+            add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 		}
 
         public function admin_menu(){
@@ -99,7 +100,32 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
         }
 
         public function load_textdomain() {
-            load_plugin_textdomain( 'otavio-serra-plugin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+            load_plugin_textdomain( 'otavio-serra-plugin', false, OS_PATH . '/languages/' );
+        }
+
+        public function enqueue_block_assets() {
+            $script_asset_path = OS_PATH . "build/index.asset.php";
+            $script_asset = require( $script_asset_path );
+             wp_enqueue_script(
+                'otavio-serra-plugin-script-editor',
+                OS_URL . 'build/index.js',
+                $script_asset['dependencies'],
+                $script_asset['version']
+            );
+            // Load translations for the editor script:
+            wp_set_script_translations( 'otavio-serra-plugin-script-editor', 'otavio-serra-plugin', OS_PATH . 'languages' );
+
+            $view_script_asset_path = OS_PATH . "build/public-block.asset.php";
+            $view_script_asset = require( $view_script_asset_path );
+            wp_enqueue_script(
+                'otavio-serra-plugin-view-script', // Correct handle
+                OS_URL . 'build/public-block.js',
+                $view_script_asset['dependencies'],
+                $view_script_asset['version'],
+                true
+            );
+            // Load translations for the view script:
+            wp_set_script_translations( 'otavio-serra-plugin-view-script', 'otavio-serra-plugin', OS_PATH . 'languages' ); // Load translations
         }
 	}
 }
