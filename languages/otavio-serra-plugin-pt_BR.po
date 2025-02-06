@@ -2,18 +2,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Otavio Serra Plugin Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
+"POT-Creation-Date: 2025-02-06 14:19-0300\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Otavio Serra <otavioserra@gmail.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-06 12:09-0300\n"
-"PO-Revision-Date: \n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html_x:1,2c;esc_html__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;"
+"_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;"
+"__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Bookmarks: \n"
 "X-Generator: Poedit 3.5\n"
@@ -89,8 +92,7 @@ msgstr "Erro no banco de dados."
 msgid "Form submitted successfully!"
 msgstr "Formulário enviado com sucesso!"
 
-#: otavio-serra-plugin.php:92
-#: otavio-serra-plugin.php:93
+#: otavio-serra-plugin.php:93 otavio-serra-plugin.php:94
 msgid "Otavio Serra Plugin"
 msgstr "Otávio Serra Plugin"
 
@@ -110,13 +112,49 @@ msgstr "Erro ao buscar dados do Gravatar."
 msgid "No Gravatar data found for this email."
 msgstr "Nenhum dado do Gravatar encontrado para este e-mail."
 
+#: pages/js/admin.js:33
+msgid "Loading..."
+msgstr "Carregando..."
+
+#: pages/js/admin.js:53
+msgid "Display Name:"
+msgstr "Primeiro Nome:"
+
+#: pages/js/admin.js:59 pages/js/admin.js:72 pages/js/admin.js:89
+msgid "N/A"
+msgstr "N / A"
+
+#: pages/js/admin.js:67
+msgid "About Me:"
+msgstr "Sobre Mim:"
+
+#: pages/js/admin.js:80
+msgid "Profile URL:"
+msgstr "Perfil URL:"
+
+#: pages/js/admin.js:95
+msgid "No Gravatar found."
+msgstr "Nenhum dado do Gravatar encontrado para este e-mail."
+
+#: pages/js/admin.js:102
+msgid "Error:"
+msgstr "Erro:"
+
+#: pages/js/admin.js:102
+msgid "Could not fetch Gravatar data."
+msgstr "Erro ao buscar dados do Gravatar."
+
+#: src/components/SuccessMessage.js:12
+msgid "Success!"
+msgstr "Sucesso!"
+
 #: views/view.admin-page.php:2
 msgid "Otavio Serra Plugin - Admin Page"
 msgstr "Plugin Otavio Serra - Página de Administração"
 
 #: views/view.admin-page.php:10
 msgid " No register stored on the database: "
-msgstr "Nenhum registro armazenado no banco de dados:"
+msgstr " Nenhum registro armazenado no banco de dados: "
 
 #: views/view.admin-page.php:12
 msgid "At least 1 record is needed to show the results."

@@ -12,11 +12,11 @@
 		"html": false
 	},
 	"textdomain": "otavio-serra-plugin",
-	"editorScript": "otavio-serra-plugin-script-editor",
+	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
 	"style": [
 		"file:./build/index.css",
 		"file:./build/style-index.css"
 	],
-	"viewScript": "otavio-serra-plugin-view-script"
+	"viewScript": "file:./build/public-block.js"
 }

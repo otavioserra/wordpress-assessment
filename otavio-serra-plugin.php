@@ -101,31 +101,33 @@ if( ! class_exists( 'Otavio_Serra_Plugin' ) ){
 
         public function load_textdomain() {
             load_plugin_textdomain( 'otavio-serra-plugin', false, OS_PATH . '/languages/' );
+            add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
         }
 
         public function enqueue_block_assets() {
             $script_asset_path = OS_PATH . "build/index.asset.php";
             $script_asset = require( $script_asset_path );
-             wp_enqueue_script(
-                'otavio-serra-plugin-script-editor',
+
+            wp_enqueue_script(
+                'assessment-otavio-serra-plugin-editor',
                 OS_URL . 'build/index.js',
                 $script_asset['dependencies'],
-                $script_asset['version']
+                $script_asset['version'],
+                true
             );
-            // Load translations for the editor script:
-            wp_set_script_translations( 'otavio-serra-plugin-script-editor', 'otavio-serra-plugin', OS_PATH . 'languages' );
+            wp_set_script_translations( 'assessment-otavio-serra-plugin-editor', 'otavio-serra-plugin', OS_PATH . 'languages' );
 
             $view_script_asset_path = OS_PATH . "build/public-block.asset.php";
             $view_script_asset = require( $view_script_asset_path );
+
             wp_enqueue_script(
-                'otavio-serra-plugin-view-script', // Correct handle
+                'assessment-otavio-serra-plugin-view',
                 OS_URL . 'build/public-block.js',
                 $view_script_asset['dependencies'],
                 $view_script_asset['version'],
                 true
             );
-            // Load translations for the view script:
-            wp_set_script_translations( 'otavio-serra-plugin-view-script', 'otavio-serra-plugin', OS_PATH . 'languages' ); // Load translations
+            wp_set_script_translations( 'assessment-otavio-serra-plugin-view', 'otavio-serra-plugin', OS_PATH . 'languages' );
         }
 	}
 }
