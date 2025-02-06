@@ -1,0 +1,292 @@
+# Blank WordPress Pot
+# Copyright 2014 ...
+# This file is distributed under the GNU General Public License v3 or later.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: "
+"Otavio Serra Plugin Pot "
+"v1.0.0\n"
+"Report-Msgid-Bugs-To: "
+"Translator Name "
+"<translations@example."
+"com>\n"
+"POT-Creation-Date: "
+"2025-02-06 12:09-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Your "
+"Name <you@example.com>\n"
+"Language-Team: Otavio "
+"Serra <otavioserra@gmail."
+"com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/"
+"plain; charset=UTF-8\n"
+"Content-Transfer-"
+"Encoding: 8bit\n"
+"Plural-Forms: "
+"nplurals=2; plural=n != "
+"1;\n"
+"X-Textdomain-Support: "
+"yesX-Generator: Poedit "
+"1.6.4\n"
+"X-Poedit-SourceCharset: "
+"UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;esc_html_e;"
+"esc_html_x:1,2c;"
+"esc_html__;esc_attr_e;"
+"esc_attr_x:1,2c;"
+"esc_attr__;_ex:1,2c;"
+"_nx:4c,1,2;"
+"_nx_noop:4c,1,2;_x:1,2c;"
+"_n:1,2;_n_noop:1,2;"
+"__ngettext:1,2;"
+"__ngettext_noop:1,2;_c,"
+"_nc:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Bookmarks: \n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-"
+"SearchPath-0: .\n"
+"X-Poedit-"
+"SearchPathExcluded-0: "
+"node_modules\n"
+"X-Poedit-"
+"SearchPathExcluded-1: ."
+"git\n"
+"X-Poedit-"
+"SearchPathExcluded-2: ."
+"husky\n"
+"X-Poedit-"
+"SearchPathExcluded-3: ."
+"scripts\n"
+"X-Poedit-"
+"SearchPathExcluded-4: "
+"build\n"
+
+#: controllers/class.block-controller.php:39
+#: controllers/class.block-controller.php:83
+msgid "Invalid nonce"
+msgstr ""
+
+#: controllers/class.block-controller.php:111
+msgid ""
+"First name is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:114
+msgid ""
+"Last name is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:117
+msgid ""
+"Phone number is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:119
+msgid ""
+"Invalid phone number "
+"format. Use XXX-XXX-XXXX"
+msgstr ""
+
+#: controllers/class.block-controller.php:123
+msgid ""
+"Birthdate is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:125
+msgid ""
+"Invalid date format.  "
+"Use YYYY-MM-DD."
+msgstr ""
+
+#: controllers/class.block-controller.php:130
+msgid "Invalid date."
+msgstr ""
+
+#: controllers/class.block-controller.php:137
+msgid "Email is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:139
+msgid ""
+"Invalid email address."
+msgstr ""
+
+#: controllers/class.block-controller.php:143
+msgid ""
+"Country is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:146
+msgid ""
+"Bio or resume is "
+"required."
+msgstr ""
+
+#: controllers/class.block-controller.php:149
+msgid ""
+"Language is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:152
+msgid ""
+"Framework is required."
+msgstr ""
+
+#: controllers/class.block-controller.php:183
+msgid "Database error."
+msgstr ""
+
+#: controllers/class.block-controller.php:186
+msgid ""
+"Form submitted "
+"successfully!"
+msgstr ""
+
+#: otavio-serra-plugin.php:92
+#: otavio-serra-plugin.php:93
+msgid "Otavio Serra Plugin"
+msgstr ""
+
+#: pages/class.admin-page.php:57
+msgid ""
+"Submission ID is "
+"required."
+msgstr ""
+
+#: pages/class.admin-page.php:70
+msgid ""
+"Submission not found."
+msgstr ""
+
+#: pages/class.admin-page.php:83
+msgid ""
+"Error fetching Gravatar "
+"data."
+msgstr ""
+
+#: pages/class.admin-page.php:91
+msgid ""
+"No Gravatar data found "
+"for this email."
+msgstr ""
+
+#: pages/js/admin.js:30
+msgid "Loading..."
+msgstr ""
+
+#: pages/js/admin.js:49
+msgid "Display Name:"
+msgstr ""
+
+#: pages/js/admin.js:51
+#: pages/js/admin.js:58
+#: pages/js/admin.js:69
+msgid "N/A"
+msgstr ""
+
+#: pages/js/admin.js:56
+msgid "About Me:"
+msgstr ""
+
+#: pages/js/admin.js:63
+msgid "Profile URL:"
+msgstr ""
+
+#: pages/js/admin.js:75
+msgid "No Gravatar found."
+msgstr ""
+
+#: pages/js/admin.js:81
+msgid "Error:"
+msgstr ""
+
+#: pages/js/admin.js:81
+msgid ""
+"Could not fetch Gravatar "
+"data."
+msgstr ""
+
+#: src/components/SuccessMessage.js:12
+msgid "Success!"
+msgstr ""
+
+#: views/view.admin-page.php:2
+msgid ""
+"Otavio Serra Plugin - "
+"Admin Page"
+msgstr ""
+
+#: views/view.admin-page.php:10
+msgid ""
+" No register stored on "
+"the database: "
+msgstr ""
+
+#: views/view.admin-page.php:12
+msgid ""
+"At least 1 record is "
+"needed to show the "
+"results."
+msgstr ""
+
+#: views/view.admin-page.php:13
+msgid ""
+"Nobody yet sent data."
+msgstr ""
+
+#: views/view.admin-page.php:14
+msgid ""
+"Try to send yourself one "
+"register to see data "
+"here."
+msgstr ""
+
+#: views/view.admin-page.php:23
+msgid "First Name"
+msgstr ""
+
+#: views/view.admin-page.php:24
+msgid "Last Name"
+msgstr ""
+
+#: views/view.admin-page.php:25
+msgid "Phone Number"
+msgstr ""
+
+#: views/view.admin-page.php:26
+msgid "Birthdate"
+msgstr ""
+
+#: views/view.admin-page.php:27
+msgid "Country"
+msgstr ""
+
+#: views/view.admin-page.php:28
+msgid "Date Submission"
+msgstr ""
+
+#: views/view.admin-page.php:44
+msgid "Email"
+msgstr ""
+
+#: views/view.admin-page.php:48
+msgid ""
+"Language / Framework"
+msgstr ""
+
+#: views/view.admin-page.php:52
+msgid "Short Bio or Resume"
+msgstr ""
+
+#: views/view.admin-page.php:56
+msgid "More Info"
+msgstr ""
+
+#: views/view.admin-page.php:59
+msgid "Get More Info"
+msgstr ""

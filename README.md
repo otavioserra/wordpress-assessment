@@ -11,6 +11,8 @@ I think that the main problem was solved today after a lot of time spent in the 
 * API external connection to fetch data from third-party API (e.g., Gravatar): **DONE**.
 * PLUS: Internacionalization of string using poedit and i18n functions: **DOING**.
 * PLUS: Add unit tests to validate the plugin’s functionality.
+* Testing everything to find out if all is done right.
+* Deploy the plugin to a zip file for easy installation in other WordPress installations.
 ## Troubleshooting
 * I faced a lot of problems with TailwindCSS with WordPress default CSS on Sunday. I worked before with TailwindCSS in one React App with no problem, but not in WordPress. I tried a lot of alternatives to not impact CSS WordPress behavior, but with not much time I preferred to leave the TailwindCSS approach and that is why I using Vanilla CSS based on the classes from TailwindCSS. With more time I can adapt my solution to use again this CSS framework, and not impacting CSS WordPress defaults.
 * I faced a lot of problems with the latest version of @wordpress/wp-scripts which throws one error of JSX when built on Monday and Tuesday. After a lot of time trying to solve the problem using a lot of other strategies, I finally found what is going on here: https://github.com/WordPress/gutenberg/issues/62202 . So, I downgrade @wordpress/wp-scripts@latest to @wordpress/scripts@26.10.0 and success build.
