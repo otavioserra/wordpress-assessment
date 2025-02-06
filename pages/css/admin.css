@@ -84,10 +84,6 @@
 	text-decoration: underline;
 }
 
-.wa-table-more-info {
-	display: none;
-}
-
 .wa-alert {
 	display: flex;
 	padding: 1rem;
@@ -115,4 +111,55 @@
 	list-style-type: disc;
 	list-style-position: inside;
 	padding-left: 1.25rem;
+}
+
+.wa-button {
+	color: #edeff3;
+	background-color: #1d4ed8;
+	font-weight: bold;
+	border-radius: 0.5rem;
+	font-size: 0.7rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 0.525rem;
+	padding-bottom: 0.525rem;
+	text-align: center;
+	transition: background-color 0.15s ease-in-out;
+	border: solid 1px #2563eb;
+	cursor: pointer;
+	margin: 0;
+}
+
+.wa-button:hover {
+	background-color: #0c215a;
+	border-color: #98aadb;
+	outline: none;
+	box-shadow: 0 0 0 0.15rem #98aadb;
+}
+
+.wa-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 0.25rem #3b82f6;
+}
+
+.wa-spinner-wrapper {
+	display: none;
+}
+
+.loading-spinner {
+	width: 1.5rem;
+	height: 1.5rem;
+	color: #4b5563;
+	animation: spin 1s linear infinite;
+	fill: #2563eb;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }

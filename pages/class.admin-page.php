@@ -85,7 +85,7 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 
             // Get the response body and decode JSON.
             $body = wp_remote_retrieve_body( $response );
-            $data = wp_json_decode( $body, true );
+            $data = json_decode( $body, true );
 
             if ( empty( $data ) || ! isset( $data['entry'] ) || ! is_array( $data['entry'] ) ) {
                 return new WP_Error( 'gravatar_no_data', __( 'No Gravatar data found for this email.', 'otavio-serra-plugin' ), array( 'status' => 404 ) );
