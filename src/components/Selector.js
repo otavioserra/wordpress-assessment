@@ -43,10 +43,11 @@ function Selector({
 		setSelectedFramework(event.target.value);
 	};
 
+	const classLabel = 'wa-label-selected';
+
 	return (
 		<Div>
 			<Div className="wa-default-container">
-				<Label htmlFor={inputLanguage}>{labelLanguage}</Label>
 				<select
 					name={inputLanguage}
 					id={inputLanguage}
@@ -64,12 +65,17 @@ function Selector({
 						</option>
 					))}
 				</select>
+				<Label
+					htmlFor={inputLanguage}
+					className={selectedLanguage !== '' ? classLabel : null}
+				>
+					{label}
+				</Label>
 				{errorLanguage && (
 					<div className="error-message">{errorLanguage}</div>
 				)}
 			</Div>
 			<Div className="wa-default-container">
-				<Label htmlFor={inputFramework}>{labelFramework}</Label>
 				<select
 					name={inputFramework}
 					id={inputFramework}
@@ -91,12 +97,6 @@ function Selector({
 					<div className="error-message">{errorFramework}</div>
 				)}
 			</Div>
-			<Label
-				htmlFor={inputLanguage}
-				className={selectedLanguage ? 'wa-label-selected' : ''}
-			>
-				{label}
-			</Label>
 		</Div>
 	);
 }
