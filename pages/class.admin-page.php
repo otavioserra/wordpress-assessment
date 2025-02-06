@@ -24,6 +24,9 @@ if ( ! class_exists( 'Admin_Page' ) ) {
 					'nonce'  => wp_create_nonce( 'wp_rest' ),
 				)
 			);
+
+            // Load translations for THIS script.  This is *crucial*.
+            wp_set_script_translations( 'otavio-serra-plugin-admin', 'otavio-serra-plugin', OS_PATH . 'languages' );
 		}
 
 		public function register_routes() {

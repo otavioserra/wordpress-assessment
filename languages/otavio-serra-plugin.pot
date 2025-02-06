@@ -1,70 +1,35 @@
-# Blank WordPress Pot
-# Copyright 2014 ...
-# This file is distributed under the GNU General Public License v3 or later.
-#, fuzzy
+# Copyright (C) 2025 Otávio Campos de Abreu Serra
+# This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: "
-"Otavio Serra Plugin Pot "
-"v1.0.0\n"
-"Report-Msgid-Bugs-To: "
-"Translator Name "
-"<translations@example."
-"com>\n"
-"POT-Creation-Date: "
-"2025-02-06 12:09-0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Your "
-"Name <you@example.com>\n"
-"Language-Team: Otavio "
-"Serra <otavioserra@gmail."
-"com>\n"
-"Language: en_US\n"
+"Project-Id-Version: Otavio Serra Plugin 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/otavio-serra-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/"
-"plain; charset=UTF-8\n"
-"Content-Transfer-"
-"Encoding: 8bit\n"
-"Plural-Forms: "
-"nplurals=2; plural=n != "
-"1;\n"
-"X-Textdomain-Support: "
-"yesX-Generator: Poedit "
-"1.6.4\n"
-"X-Poedit-SourceCharset: "
-"UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;esc_html_e;"
-"esc_html_x:1,2c;"
-"esc_html__;esc_attr_e;"
-"esc_attr_x:1,2c;"
-"esc_attr__;_ex:1,2c;"
-"_nx:4c,1,2;"
-"_nx_noop:4c,1,2;_x:1,2c;"
-"_n:1,2;_n_noop:1,2;"
-"__ngettext:1,2;"
-"__ngettext_noop:1,2;_c,"
-"_nc:4c,1,2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Bookmarks: \n"
-"X-Generator: Poedit 3.5\n"
-"X-Poedit-"
-"SearchPath-0: .\n"
-"X-Poedit-"
-"SearchPathExcluded-0: "
-"node_modules\n"
-"X-Poedit-"
-"SearchPathExcluded-1: ."
-"git\n"
-"X-Poedit-"
-"SearchPathExcluded-2: ."
-"husky\n"
-"X-Poedit-"
-"SearchPathExcluded-3: ."
-"scripts\n"
-"X-Poedit-"
-"SearchPathExcluded-4: "
-"build\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-06T18:27:03+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: otavio-serra-plugin\n"
+
+#. Plugin Name of the plugin
+#: otavio-serra-plugin.php
+#: otavio-serra-plugin.php:93
+#: otavio-serra-plugin.php:94
+msgid "Otavio Serra Plugin"
+msgstr ""
+
+#. Description of the plugin
+#: otavio-serra-plugin.php
+msgid "WordPress Plugin Development Challenge - The Company requires a form on the website that allows the developers to submit their information to be interviewed for a development position."
+msgstr ""
+
+#. Author of the plugin
+#: otavio-serra-plugin.php
+msgid "Otávio Campos de Abreu Serra"
+msgstr ""
 
 #: controllers/class.block-controller.php:39
 #: controllers/class.block-controller.php:83
@@ -72,35 +37,32 @@ msgid "Invalid nonce"
 msgstr ""
 
 #: controllers/class.block-controller.php:111
-msgid ""
-"First name is required."
+#: src/components/Widget.jsx:66
+msgid "First name is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:114
-msgid ""
-"Last name is required."
+#: src/components/Widget.jsx:72
+msgid "Last name is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:117
-msgid ""
-"Phone number is required."
+#: src/components/Widget.jsx:78
+msgid "Phone number is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:119
-msgid ""
-"Invalid phone number "
-"format. Use XXX-XXX-XXXX"
+#: src/components/Widget.jsx:85
+msgid "Invalid phone number format. Use XXX-XXX-XXXX"
 msgstr ""
 
 #: controllers/class.block-controller.php:123
-msgid ""
-"Birthdate is required."
+#: src/components/Widget.jsx:92
+msgid "Birthdate is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:125
-msgid ""
-"Invalid date format.  "
-"Use YYYY-MM-DD."
+msgid "Invalid date format.  Use YYYY-MM-DD."
 msgstr ""
 
 #: controllers/class.block-controller.php:130
@@ -108,33 +70,32 @@ msgid "Invalid date."
 msgstr ""
 
 #: controllers/class.block-controller.php:137
+#: src/components/Widget.jsx:98
 msgid "Email is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:139
-msgid ""
-"Invalid email address."
+msgid "Invalid email address."
 msgstr ""
 
 #: controllers/class.block-controller.php:143
-msgid ""
-"Country is required."
+#: src/components/Widget.jsx:103
+msgid "Country is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:146
-msgid ""
-"Bio or resume is "
-"required."
+#: src/components/Widget.jsx:106
+msgid "Bio or resume is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:149
-msgid ""
-"Language is required."
+#: src/components/Widget.jsx:113
+msgid "Language is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:152
-msgid ""
-"Framework is required."
+#: src/components/Widget.jsx:119
+msgid "Framework is required."
 msgstr ""
 
 #: controllers/class.block-controller.php:183
@@ -142,127 +103,67 @@ msgid "Database error."
 msgstr ""
 
 #: controllers/class.block-controller.php:186
-msgid ""
-"Form submitted "
-"successfully!"
-msgstr ""
-
-#: otavio-serra-plugin.php:92
-#: otavio-serra-plugin.php:93
-msgid "Otavio Serra Plugin"
+msgid "Form submitted successfully!"
 msgstr ""
 
 #: pages/class.admin-page.php:57
-msgid ""
-"Submission ID is "
-"required."
+msgid "Submission ID is required."
 msgstr ""
 
 #: pages/class.admin-page.php:70
-msgid ""
-"Submission not found."
+msgid "Submission not found."
 msgstr ""
 
 #: pages/class.admin-page.php:83
-msgid ""
-"Error fetching Gravatar "
-"data."
+msgid "Error fetching Gravatar data."
 msgstr ""
 
 #: pages/class.admin-page.php:91
-msgid ""
-"No Gravatar data found "
-"for this email."
-msgstr ""
-
-#: pages/js/admin.js:30
-msgid "Loading..."
-msgstr ""
-
-#: pages/js/admin.js:49
-msgid "Display Name:"
-msgstr ""
-
-#: pages/js/admin.js:51
-#: pages/js/admin.js:58
-#: pages/js/admin.js:69
-msgid "N/A"
-msgstr ""
-
-#: pages/js/admin.js:56
-msgid "About Me:"
-msgstr ""
-
-#: pages/js/admin.js:63
-msgid "Profile URL:"
-msgstr ""
-
-#: pages/js/admin.js:75
-msgid "No Gravatar found."
-msgstr ""
-
-#: pages/js/admin.js:81
-msgid "Error:"
-msgstr ""
-
-#: pages/js/admin.js:81
-msgid ""
-"Could not fetch Gravatar "
-"data."
-msgstr ""
-
-#: src/components/SuccessMessage.js:12
-msgid "Success!"
+msgid "No Gravatar data found for this email."
 msgstr ""
 
 #: views/view.admin-page.php:2
-msgid ""
-"Otavio Serra Plugin - "
-"Admin Page"
+msgid "Otavio Serra Plugin - Admin Page"
 msgstr ""
 
 #: views/view.admin-page.php:10
-msgid ""
-" No register stored on "
-"the database: "
+msgid " No register stored on the database: "
 msgstr ""
 
 #: views/view.admin-page.php:12
-msgid ""
-"At least 1 record is "
-"needed to show the "
-"results."
+msgid "At least 1 record is needed to show the results."
 msgstr ""
 
 #: views/view.admin-page.php:13
-msgid ""
-"Nobody yet sent data."
+msgid "Nobody yet sent data."
 msgstr ""
 
 #: views/view.admin-page.php:14
-msgid ""
-"Try to send yourself one "
-"register to see data "
-"here."
+msgid "Try to send yourself one register to see data here."
 msgstr ""
 
 #: views/view.admin-page.php:23
+#: src/components/Widget.jsx:261
 msgid "First Name"
 msgstr ""
 
 #: views/view.admin-page.php:24
+#: src/components/Widget.jsx:273
 msgid "Last Name"
 msgstr ""
 
 #: views/view.admin-page.php:25
+#: src/components/Widget.jsx:288
 msgid "Phone Number"
 msgstr ""
 
 #: views/view.admin-page.php:26
+#: src/components/Widget.jsx:301
 msgid "Birthdate"
 msgstr ""
 
 #: views/view.admin-page.php:27
+#: src/components/Widget.jsx:326
 msgid "Country"
 msgstr ""
 
@@ -275,11 +176,11 @@ msgid "Email"
 msgstr ""
 
 #: views/view.admin-page.php:48
-msgid ""
-"Language / Framework"
+msgid "Language / Framework"
 msgstr ""
 
 #: views/view.admin-page.php:52
+#: src/components/Widget.jsx:338
 msgid "Short Bio or Resume"
 msgstr ""
 
@@ -289,4 +190,94 @@ msgstr ""
 
 #: views/view.admin-page.php:59
 msgid "Get More Info"
+msgstr ""
+
+#: pages/js/admin.js:33
+msgid "Loading..."
+msgstr ""
+
+#: pages/js/admin.js:53
+msgid "Display Name:"
+msgstr ""
+
+#: pages/js/admin.js:59
+#: pages/js/admin.js:72
+#: pages/js/admin.js:89
+msgid "N/A"
+msgstr ""
+
+#: pages/js/admin.js:67
+msgid "About Me:"
+msgstr ""
+
+#: pages/js/admin.js:80
+msgid "Profile URL:"
+msgstr ""
+
+#: pages/js/admin.js:94
+msgid "No Gravatar found."
+msgstr ""
+
+#: pages/js/admin.js:102
+msgid "Error:"
+msgstr ""
+
+#: pages/js/admin.js:102
+msgid "Could not fetch Gravatar data."
+msgstr ""
+
+#: src/components/SuccessMessage.js:12
+msgid "Success!"
+msgstr ""
+
+#: src/components/Widget.jsx:100
+msgid "Invalid email format."
+msgstr ""
+
+#: src/components/Widget.jsx:156
+msgid "Form submitted successfully! We will contact you soon."
+msgstr ""
+
+#: src/components/Widget.jsx:182
+msgid "Loading…"
+msgstr ""
+
+#: src/components/Widget.jsx:185
+msgid "Fetching data…"
+msgstr ""
+
+#: src/components/Widget.jsx:221
+msgid "Error"
+msgstr ""
+
+#: src/components/Widget.jsx:225
+msgid "Error: problems rendering the form. Try again later."
+msgstr ""
+
+#: src/components/Widget.jsx:240
+msgid "Interview Development Position"
+msgstr ""
+
+#: src/components/Widget.jsx:245
+msgid "Fill all the form and click on submit button to send the form and start to enter in a job assessment"
+msgstr ""
+
+#: src/components/Widget.jsx:314
+msgid "Email Address"
+msgstr ""
+
+#: src/components/Widget.jsx:346
+msgid "Language & Framework"
+msgstr ""
+
+#: src/components/Widget.jsx:350
+msgid "Select Language…"
+msgstr ""
+
+#: src/components/Widget.jsx:354
+msgid "Select Framework…"
+msgstr ""
+
+#: src/components/Widget.jsx:364
+msgid "Submit"
 msgstr ""
