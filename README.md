@@ -9,7 +9,7 @@ I think that the main problem was solved today after a lot of time spent in the 
 * Update language and framework source from database: **DONE**.
 * Get language and framework data from the database using the REST API route and controller to compute it: **DONE**.
 * API external connection to fetch data from third-party API (e.g., Gravatar): **DONE**.
-* PLUS: Internacionalization of string using poedit and i18n functions: **DOING**.
+* PLUS: Internacionalization of string using poedit and i18n functions: **DONE**.
 * PLUS: Add unit tests to validate the plugin’s functionality.
 * Testing everything to find out if all is done right.
 * Deploy the plugin to a zip file for easy installation in other WordPress installations.

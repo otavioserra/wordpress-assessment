@@ -1,18 +1,15 @@
-# Blank WordPress Pot
-# Copyright 2014 ...
-# This file is distributed under the GNU General Public License v3 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: Otavio Serra Plugin Pot v1.0.0\n"
 "Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2025-02-06 12:09-0300\n"
-"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Otavio Serra <otavioserra@gmail.com>\n"
-"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-06 12:09-0300\n"
+"PO-Revision-Date: \n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Textdomain-Support: yesX-Generator: Poedit 1.6.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -92,7 +89,8 @@ msgstr "Erro no banco de dados."
 msgid "Form submitted successfully!"
 msgstr "Formulário enviado com sucesso!"
 
-#: otavio-serra-plugin.php:92 otavio-serra-plugin.php:93
+#: otavio-serra-plugin.php:92
+#: otavio-serra-plugin.php:93
 msgid "Otavio Serra Plugin"
 msgstr "Otávio Serra Plugin"
 
@@ -111,42 +109,6 @@ msgstr "Erro ao buscar dados do Gravatar."
 #: pages/class.admin-page.php:91
 msgid "No Gravatar data found for this email."
 msgstr "Nenhum dado do Gravatar encontrado para este e-mail."
-
-#: pages/js/admin.js:30
-msgid "Loading..."
-msgstr "Carregando..."
-
-#: pages/js/admin.js:49
-msgid "Display Name:"
-msgstr "Nome de exibição:"
-
-#: pages/js/admin.js:51 pages/js/admin.js:58 pages/js/admin.js:69
-msgid "N/A"
-msgstr "N/A"
-
-#: pages/js/admin.js:56
-msgid "About Me:"
-msgstr "Sobre mim:"
-
-#: pages/js/admin.js:63
-msgid "Profile URL:"
-msgstr "URL do perfil:"
-
-#: pages/js/admin.js:75
-msgid "No Gravatar found."
-msgstr "Nenhum Gravatar encontrado."
-
-#: pages/js/admin.js:81
-msgid "Error:"
-msgstr "Erro:"
-
-#: pages/js/admin.js:81
-msgid "Could not fetch Gravatar data."
-msgstr "Não foi possível obter dados do Gravatar."
-
-#: src/components/SuccessMessage.js:12
-msgid "Success!"
-msgstr "Sucesso!"
 
 #: views/view.admin-page.php:2
 msgid "Otavio Serra Plugin - Admin Page"
